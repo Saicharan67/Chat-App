@@ -1,11 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
+import {BrowserRouter as Router,Route} from 'react-router-dom'
 import './App.css';
-import EventHandle from './EventHandle.js'
+import HomePage from './Containers/Home';
+import LoginPage from './Containers/Login';
+import SignUpPage from './Containers/Register';
+
 function App() {
   return (
     <div className="App">
-      <EventHandle></EventHandle>
+      <Router>
+        <Route path='/' component={HomePage}/>
+        <Route path='/login' component={LoginPage}/>
+        <Route path='/signip' component={SignUpPage}/>
+      </Router>
     </div>
   );
 }
