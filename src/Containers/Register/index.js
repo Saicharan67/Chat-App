@@ -20,7 +20,8 @@ const SignUpPage = (props) => {
         <div className='registerConatainer'>
             <Card>
                 <form>
-
+                   <input>
+                   </input>
                 </form>
             </Card>
 
