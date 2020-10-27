@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Layout from '../../Components/layout'
-import Card from '../../Components/layout/UI'
+import Card from '../../Components/UI'
 import './style.css'
 /**
 * @author
@@ -9,8 +9,8 @@ import './style.css'
 
 const LoginPage = (props) => {
 
-    const {email , setEmail} = useState('');
-    const {password , setPassword} = useState('')
+    const [email , setEmail] = useState('');
+    const [password , setPassword] = useState('')
   return(
     <Layout>
         <div className='loginContainer'>

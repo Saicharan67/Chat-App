@@ -4,7 +4,8 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import firebase from 'firebase'
-
+import {Provider} from 'react-redux'
+import store from './store'
 const firebaseConfig = {
   apiKey: "AIzaSyBwgSea1nJXF2dr4CVgF7U9v4s8mYPOsCg",
   authDomain: "chat-app-f6ff0.firebaseapp.com",
@@ -17,11 +18,13 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig)
-
+window.store = store
 ReactDOM.render(
+  <Provider store={store}>
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
+  </React.StrictMode>
+  </Provider>,
   document.getElementById('root')
 );
 

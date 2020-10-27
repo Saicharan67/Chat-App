@@ -1,27 +1,77 @@
 import React, { useState } from 'react'
 import Layout from '../../Components/layout'
-import Card from '../../Components/layout/UI'
-
+import Card from '../../Components/UI'
+import {signup} from '../../actions'
+import { useDispatch } from 'react-redux'
 /**
 * @author
 * @function SignUpPage
 **/
-
 const SignUpPage = (props) => {
-    const {FirstName , setFirstName} = useState('')
-    const {lastName , setlastName} = useState('')
-    const {email , setEmail} = useState('')
-    const {password , setPassword} = useState('')
+    const [FirstName , setFirstName] = useState('')
+    const [LastName , setlastName] = useState('')
+    const [email , setEmail] = useState('')
+    const [password , setPassword] = useState('')
+    const dispatch = useDispatch();
 
+const registerUser = (e) => {
+    e.preventDefault()
+    const user = {
+        FirstName,LastName,email,password
 
+    }
+    dispatch(signup(user))
+}
 
   return(
     <Layout>
-        <div className='registerConatainer'>
+        <div className='registerContainer'>
             <Card>
-                <form>
-                   <input>
-                   </input>
+                <form onSubmit={registerUser}>
+                    <h2>Sign Up</h2>
+                <input
+                name="FirstName"
+                type='FirtName'
+                value={FirstName}
+                onChange={(e) =>{
+                   setFirstName(e.target.value)
+                }}
+                placeholder="FirstName"
+                >
+                </input>
+                <input
+                name="LastName"
+                type='LastName'
+                value={LastName}
+                onChange={(e) =>{
+                   setlastName(e.target.value)
+                }}
+                placeholder="LastName"
+                >
+                </input>
+                <input
+                name="email"
+                type='email'
+                value={email}
+                onChange={(e) =>{
+                   setEmail(e.target.value)
+                }}
+                placeholder="Email.."
+                >
+                </input>
+                <input
+                name="password"
+                type='password'
+                value={password}
+                onChange={(e) =>{
+                   setPassword(e.target.value)
+                }}
+                placeholder="Password"
+                >
+                </input>
+                <button>
+                    SignUp
+                </button>
                 </form>
             </Card>
 
