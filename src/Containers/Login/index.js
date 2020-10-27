@@ -1,13 +1,51 @@
-import React from 'react'
-
+import React, { useState } from 'react'
+import Layout from '../../Components/layout'
+import Card from '../../Components/layout/UI'
+import './style.css'
 /**
 * @author
 * @function LoginPage
 **/
 
 const LoginPage = (props) => {
+
+    const {email , setEmail} = useState('');
+    const {password , setPassword} = useState('')
   return(
-    <div>LoginPage</div>
+    <Layout>
+        <div className='loginContainer'>
+        <Card children="Login">
+            <form>
+                <input
+                name="email"
+                type='email'
+                value={email}
+                onChange={(e) =>{
+                   setEmail(e.target.value)
+                }}
+                placeholder="Email.."
+                >
+                </input>
+                <input
+                name="password"
+                type='password'
+                value={password}
+                onChange={(e) =>{
+                   setPassword(e.target.value)
+                }}
+                placeholder="Password.."
+                >
+                </input>
+                <div>
+                    <button>
+                        Login
+                    </button>
+                </div>
+            </form>
+        </Card>
+        </div>
+       
+    </Layout>
    )
 
  }

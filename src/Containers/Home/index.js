@@ -1,4 +1,5 @@
 import React from 'react'
+import Layout from '../../Components/layout'
 
 /**
 * @author
@@ -7,7 +8,10 @@ import React from 'react'
 
 const HomePage = (props) => {
   return(
-    <div>HomePage</div>
+      <Layout>
+       <div>HomePage</div>
+      </Layout>
+    
    )
 
  }

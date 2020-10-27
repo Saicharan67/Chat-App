@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Layout from '../../Components/layout'
+import Card from '../../Components/layout/UI'
 
 /**
 * @author
@@ -6,8 +8,24 @@ import React from 'react'
 **/
 
 const SignUpPage = (props) => {
+    const {FirstName , setFirstName} = useState('')
+    const {lastName , setlastName} = useState('')
+    const {email , setEmail} = useState('')
+    const {password , setPassword} = useState('')
+
+
+
   return(
-    <div>SignUpPage</div>
+    <Layout>
+        <div className='registerConatainer'>
+            <Card>
+                <form>
+
+                </form>
+            </Card>
+
+        </div>
+    </Layout>
    )
 
  }
