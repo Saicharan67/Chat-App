@@ -33,6 +33,20 @@ export default (state = initstate,action) => {
                 authenticating: false
             }
             break
+        case `${authConstants.USER_LOGOUT}_REQUEST`:
+            break;
+        case `${authConstants.USER_LOGOUT}_SUCCESS`:
+            state={
+                ...initstate
+            }
+             break;
+        case `${authConstants.USER_LOGOUT}_FAILURE`:
+               state={
+                   ...state,
+                   error: action.payload.error
+
+               }
+                break;
     }
     return state
 }

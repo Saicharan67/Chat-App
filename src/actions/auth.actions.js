@@ -21,7 +21,8 @@ export const signup = (user) => {
                    FirstName: user.FirstName,
                    LastName: user.LastName,
                    uid: data.user.uid,
-                   createdAt: new Date()
+                   createdAt: new Date(),
+                   isOnline : true
                })
                .then(()=>{
                    const loggedInUser = {
@@ -98,4 +99,27 @@ export const isLoggedInUser = () => {
         })
     }
 }
+}
+
+export const logout = () => {
+    return async dispatch => {
+        dispatch({
+            type: `${authConstants.USER_LOGOUT}_REQUEST`
+        })
+        auth()
+        .signOut()
+        .then(()=>{
+           localStorage.clear()
+           dispatch({
+               type : `${authConstants.USER_LOGIN}_SUCCESS`
+           })
+        })
+        .catch(error => {
+            console.log(error)
+            dispatch({
+                type: `${authConstants.USER_LOGIN}_FAILURE`,
+                payload: {error}
+            })
+        })
+    }
 }

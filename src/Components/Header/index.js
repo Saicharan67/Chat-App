@@ -1,7 +1,8 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {NavLink,Link} from 'react-router-dom'
 import './style.css'
+import {logout} from '../../actions'
 /**
 * @author
 * @function Header
@@ -9,6 +10,10 @@ import './style.css'
 
 const Header = (props) => {
     const auth = useSelector(state => state.auth)
+    const dispatch = useDispatch()
+    
+
+    
   return(
     <header className="header">
         <div style={{display: 'flex'}}>
@@ -28,7 +33,9 @@ const Header = (props) => {
           {
               auth.authenticated ? 
               <li>
-              <Link to={"#"} onClick={props.logout}>Logout</Link>
+              <Link to={"#"} onClick={()=>{
+                dispatch(logout())
+              }}>Logout</Link>
               </li>
               :null
 
