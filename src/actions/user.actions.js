@@ -16,7 +16,8 @@ return async dispatch => {
         });
        // console.log(users);
        dispatch({
-           type: `${UserConstants.GET_REAL_TIME_USERS}_SUCCESS`
+           type: `${UserConstants.GET_REAL_TIME_USERS}_SUCCESS`,
+           payload: 
        })
     });
 }
