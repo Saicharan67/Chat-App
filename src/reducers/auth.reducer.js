@@ -9,6 +9,7 @@ const initstate = {
     error: null
 }
 export default (state = initstate,action) => {
+    console.log(action)
     switch(action.type){
         case `${authConstants.USER_LOGIN}_REQUEST`:
             state = {

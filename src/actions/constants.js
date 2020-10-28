@@ -1,3 +1,3 @@
 export const authConstants = {
-    USER_lOGIN: 'USER_LOGIN'
+    USER_LOGIN: 'USER_LOGIN'
 }
