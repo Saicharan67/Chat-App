@@ -56,38 +56,38 @@ export const signin = (user)=> {
     return async dispatch => {
         dispatch({type: `${authConstants.USER_LOGIN}_REQUEST`})
         const db = firestore()
-        
         auth()
         .signInWithEmailAndPassword(user.email,user.password)
         .then((data)=>{
               console.log("SignIn Data",data)
-              const name = data.user.displayName.split(" ");
-              const FirstName = name[0]
-              const LastName = name[1]
-              const loggedInUser = {
-                FirstName,
-                LastName,
-                uid: data.user.uid,
-                email: data.user.email,
-
-               }
-               db.collection('users')
-                .doc(data.user.uid)
-                .update({
-                    isOnline: true
-                })
-                .then(()=>{
-
-                })
-                .catch(()=>{
-
-                })
-               localStorage.setItem('users',JSON.stringify(loggedInUser))
-              dispatch({
-                  type: `${authConstants.USER_LOGIN}_SUCCESS`,
-                  payload: {user: loggedInUser}
-              })
-              console.log("Logged In successfully")
+              db.collection('users')
+            .doc(data.user.uid)
+            .update({
+                isOnline: true
+            })
+            .then(()=>{
+                    const name = data.user.displayName.split(" ");
+                    const FirstName = name[0]
+                    const LastName = name[1]
+                    const loggedInUser = {
+                    FirstName,
+                    LastName,
+                    uid: data.user.uid,
+                    email: data.user.email,
+    
+                    }
+                    
+                    localStorage.setItem('users',JSON.stringify(loggedInUser))
+                    dispatch({
+                        type: `${authConstants.USER_LOGIN}_SUCCESS`,
+                        payload: {user: loggedInUser}
+                    })
+                    console.log("Logged In successfully")
+            })
+            .catch((err)=>{
+                   console.log(err)
+            })
+              
         })
         .catch((err)=>{
             console.log(err)
@@ -138,7 +138,7 @@ export const logout = (uid) => {
                })
             })
             .catch(error => {
-                console.log(error)
+               
                 dispatch({
                     type: `${authConstants.USER_LOGIN}_FAILURE`,
                     payload: {error}

@@ -18,30 +18,14 @@
 //  }
 
 // export default HomePage
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRealTimeUsers } from '../../actions/user.actions';
-
-const HomePage = (props) => {
-   const dispatch = useDispatch() 
-
-   const auth = useSelector(state => state.auth)
-   const user = useSelector(state => state.user)
-
-   console.log(user)
-    useEffect(()=>{
-          dispatch(getRealTimeUsers(auth.uid))
-    }, [])
-  return (
-      <Layout>
-    <section className="container">
-    <div className="listOfUsers">
-       {
-           user.users.length > 0 ? 
-           user.users.map(user => {
-               return(
-                <div key={user.uid} className="displayName">
+const User = props => {
+    const {user ,onClick} = props;
+return(
+               <div onClick={()=>onClick(user)} key={user.uid} className="displayName">
                     <div className="displayPic">
                         <img src="https://avatars1.githubusercontent.com/u/54733827?v=4" alt="Dp" />
                     </div>
@@ -51,6 +35,48 @@ const HomePage = (props) => {
                         </span>
                     </div>
                 </div>
+)
+}
+const HomePage = (props) => {
+   const dispatch = useDispatch() 
+   let unsubscribe;
+   const auth = useSelector(state => state.auth)
+   const user = useSelector(state => state.user)
+   const [ChatStarted,setChatStarted] =useState(false)
+   const [ChatUser,setChatUser] =useState('')
+
+   console.log(user)
+
+    useEffect(()=>{
+       unsubscribe =  dispatch(getRealTimeUsers(auth.uid))
+          .then((unsubscribe)=>{
+             return unsubscribe
+          })
+          .catch((err)=>{
+              console.log(err)
+          })
+    }, [])
+
+    useEffect(()=>{
+        return ()=>{
+            unsubscribe.then(f=>f()).catch(err=>console.log(err))
+        }
+    },[])
+
+    const initChat = (user) => {
+             setChatStarted(true)
+             setChatUser( `${user.FirstName} ${user.LastName}`)
+             console.log(user)
+    } 
+  return (
+      <Layout>
+    <section className="container">
+    <div className="listOfUsers">
+       {
+           user.users.length > 0 ? 
+           user.users.map(user => {
+               return(
+                 <User onClick={initChat} key={user.uid} user={user}/>
                )
            })
            : null
@@ -58,7 +84,16 @@ const HomePage = (props) => {
                 
     </div>
     <div className="chatArea">
-        <div className="chatHeader"> Sai Charan </div>
+      
+          
+        <div className="chatHeader">
+               {
+                   ChatStarted?
+                   ChatUser: 'Start Chating By Clicking On Users'
+                   
+               }
+        </div>
+       
         <div className="messageSections">
 
             <div style={{ textAlign: 'left' }}>

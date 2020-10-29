@@ -7,7 +7,7 @@ return async dispatch => {
         type: `${UserConstants.GET_REAL_TIME_USERS}_REQUEST`
     });
     const db =firestore()
-    db.collection("users")
+   const unsubscribe = db.collection("users")
    // .where("uid", "!=",uid)
     .onSnapshot((querySnapshot)=> {
         const  users = [];
@@ -23,5 +23,6 @@ return async dispatch => {
            payload: {users}
        })
     });
+    return unsubscribe;
 }
 }
