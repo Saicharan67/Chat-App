@@ -17,7 +17,9 @@ export const signup = (user) => {
             
             .then(()=>{
                 console.log(data)
-               db.collection('users').add({
+               db.collection('users')
+               .doc(data.user.uid)
+               .set({
                    FirstName: user.FirstName,
                    LastName: user.LastName,
                    uid: data.user.uid,
@@ -34,7 +36,7 @@ export const signup = (user) => {
                 localStorage.setItem('users' ,JSON.stringify({
                     loggedInUser
                 }))
-                console.log("Signe Up  success")
+                console.log("Sign Up  success")
                 dispatch({
                     type: `${authConstants.USER_LOGIN}_SUCCESS`,
                     payload: {user: loggedInUser}
@@ -53,6 +55,8 @@ export const signup = (user) => {
 export const signin = (user)=> {
     return async dispatch => {
         dispatch({type: `${authConstants.USER_LOGIN}_REQUEST`})
+        const db = firestore()
+        
         auth()
         .signInWithEmailAndPassword(user.email,user.password)
         .then((data)=>{
@@ -64,8 +68,20 @@ export const signin = (user)=> {
                 FirstName,
                 LastName,
                 uid: data.user.uid,
-                email: data.user.email
+                email: data.user.email,
+
                }
+               db.collection('users')
+                .doc(data.user.uid)
+                .update({
+                    isOnline: true
+                })
+                .then(()=>{
+
+                })
+                .catch(()=>{
+
+                })
                localStorage.setItem('users',JSON.stringify(loggedInUser))
               dispatch({
                   type: `${authConstants.USER_LOGIN}_SUCCESS`,
@@ -101,25 +117,37 @@ export const isLoggedInUser = () => {
 }
 }
 
-export const logout = () => {
+export const logout = (uid) => {
     return async dispatch => {
         dispatch({
             type: `${authConstants.USER_LOGOUT}_REQUEST`
         })
-        auth()
-        .signOut()
-        .then(()=>{
-           localStorage.clear()
-           dispatch({
-               type : `${authConstants.USER_LOGIN}_SUCCESS`
-           })
+        const db = firestore()
+        db.collection('users')
+        .doc(uid)
+        .update({
+            isOnline: false
         })
-        .catch(error => {
-            console.log(error)
-            dispatch({
-                type: `${authConstants.USER_LOGIN}_FAILURE`,
-                payload: {error}
+        .then(()=>{
+            auth()
+            .signOut()
+            .then(()=>{
+               localStorage.clear()
+               dispatch({
+                   type : `${authConstants.USER_LOGIN}_SUCCESS`
+               })
+            })
+            .catch(error => {
+                console.log(error)
+                dispatch({
+                    type: `${authConstants.USER_LOGIN}_FAILURE`,
+                    payload: {error}
+                })
             })
         })
+        .catch((err)=>{
+            console.log(err)
+        })
+        
     }
 }
