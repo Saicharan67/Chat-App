@@ -26,3 +26,21 @@ return async dispatch => {
     return unsubscribe;
 }
 }
+
+export const updateMessage = (msgObj) => {
+    return async dispatch => {
+        const db =firestore();
+        db.collection('conversation')
+        .add({
+            ...msgObj,
+            isView: false,
+            createdAt: new Date()
+        })
+        .then((data)=>{
+            console.log(data)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    }
+}

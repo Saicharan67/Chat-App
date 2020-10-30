@@ -21,7 +21,7 @@
 import React, { useEffect, useState } from 'react';
 import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { getRealTimeUsers } from '../../actions/user.actions';
+import { getRealTimeUsers, updateMessage } from '../../actions/user.actions';
 const User = props => {
     const {user ,onClick} = props;
 return(
@@ -31,7 +31,7 @@ return(
                     </div>
                     <div style={{display: 'flex',flex: 1, justifyContent: 'space-between', margin: '0 10px'}}>
                         <span style={{fontWeight: 500}}>{user.FirstName} {user.LastName}</span>
-                        <span>{user.isOnline ? 'Online': 'Offline'}
+                        <span className={user.isOnline ? 'onlineStatus': 'onlineStatus off'}>
                         </span>
                     </div>
                 </div>
@@ -44,6 +44,8 @@ const HomePage = (props) => {
    const user = useSelector(state => state.user)
    const [ChatStarted,setChatStarted] =useState(false)
    const [ChatUser,setChatUser] =useState('')
+   const [message,setmessage] =useState('')
+   const [UserUid,setUserUid] =useState('')
 
    console.log(user)
 
@@ -65,9 +67,21 @@ const HomePage = (props) => {
 
     const initChat = (user) => {
              setChatStarted(true)
+             setUserUid(user.uid)
              setChatUser( `${user.FirstName} ${user.LastName}`)
              console.log(user)
     } 
+    const submitMsg = () => {
+         const msgObj ={
+             user_uid_1: auth.uid,
+             user_uid_2: UserUid,
+             message
+         }
+         if(message!==''){
+             dispatch(updateMessage(msgObj))
+         }
+         //console.log(msgObj)
+    }
   return (
       <Layout>
     <section className="container">
@@ -95,16 +109,27 @@ const HomePage = (props) => {
         </div>
        
         <div className="messageSections">
-
-            <div style={{ textAlign: 'left' }}>
-                <p className="messageStyle" >Hello User</p>
-            </div>
-
+            {
+                ChatStarted?
+                
+                <div style={{ textAlign: 'left' }}>
+                   <p className="messageStyle" >Hello User</p>
+                </div> : ""
+            
+           
+            }
         </div>
-        <div className="chatControls">
-            <textarea />
-            <button>Send</button>
-        </div>
+        {
+            ChatStarted?
+            <div className="chatControls">
+                <textarea 
+                value={message}
+                onChange={(e)=> setmessage(e.target.value)}
+                placeholder='Enter Message'
+                />
+                <button onClick={submitMsg}>Send</button>
+            </div>: null
+        }
     </div>
 </section>
 </Layout>
