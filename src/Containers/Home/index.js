@@ -21,7 +21,7 @@
 import React, { useEffect, useState } from 'react';
 import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { getRealTimeUsers, updateMessage } from '../../actions/user.actions';
+import { getRealTimeConversations, getRealTimeUsers, updateMessage } from '../../actions/user.actions';
 const User = props => {
     const {user ,onClick} = props;
 return(
@@ -47,7 +47,7 @@ const HomePage = (props) => {
    const [message,setmessage] =useState('')
    const [UserUid,setUserUid] =useState('')
 
-   console.log(user)
+   
 
     useEffect(()=>{
        unsubscribe =  dispatch(getRealTimeUsers(auth.uid))
@@ -57,6 +57,8 @@ const HomePage = (props) => {
           .catch((err)=>{
               console.log(err)
           })
+
+       
     }, [])
 
     useEffect(()=>{
@@ -70,6 +72,7 @@ const HomePage = (props) => {
              setUserUid(user.uid)
              setChatUser( `${user.FirstName} ${user.LastName}`)
              console.log(user)
+             dispatch(getRealTimeConversations({uid_1: auth.uid,uid_2: user.uid }))
     } 
     const submitMsg = () => {
          const msgObj ={
@@ -79,6 +82,9 @@ const HomePage = (props) => {
          }
          if(message!==''){
              dispatch(updateMessage(msgObj))
+             .then(()=>{
+               setmessage('')
+             })
          }
          //console.log(msgObj)
     }
@@ -111,10 +117,13 @@ const HomePage = (props) => {
         <div className="messageSections">
             {
                 ChatStarted?
+                user.conversations.map(con=>
+                    <div style={{ textAlign: con.user_uid_1==auth.uid? 'right': 'left' }}>
+                      <p className="messageStyle" >{con.message}</p>
+                   </div>
+                )
                 
-                <div style={{ textAlign: 'left' }}>
-                   <p className="messageStyle" >Hello User</p>
-                </div> : ""
+                : ""
             
            
             }

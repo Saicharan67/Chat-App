@@ -1,7 +1,8 @@
 import { UserConstants } from "../actions/constants"
 
 const initstate ={
-    users:[]
+    users:[],
+    conversations: []
 }
 
 
@@ -13,6 +14,12 @@ export default (state = initstate,action) => {
         state={
             ...state,
             users: action.payload.users
+        }
+        break
+    case UserConstants.GET_REALTIME_MESSAGES:
+        state={
+            ...state,
+            conversations: action.payload.conversations
         }
         break
 

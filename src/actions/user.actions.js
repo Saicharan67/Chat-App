@@ -37,10 +37,45 @@ export const updateMessage = (msgObj) => {
             createdAt: new Date()
         })
         .then((data)=>{
+            // dispatch({
+            //     type: UserConstants. GET_REALTIME_MESSAGES,
+                
+            // })
             console.log(data)
         })
         .catch(err=>{
             console.log(err)
         })
     }
+}
+
+export const getRealTimeConversations =(user)=> {
+    return async dispatch => {
+        const db =firestore()
+        db.collection('conversation')
+        .where('user_uid_1','in',[user.uid_1,user.uid_2])
+        .orderBy('createdAt','asc')
+        .onSnapshot((querySnapshot)=>{
+            const conversations = []
+            querySnapshot.forEach(doc=>{
+                if(
+                    (doc.data().user_uid_1 == user.uid_1 && doc.data().user_uid_2 == user.uid_2)
+                    || 
+                    (doc.data().user_uid_1 == user.uid_2 && doc.data().user_uid_2 == user.uid_1)
+                ){
+                    conversations.push(doc.data())
+                }
+
+
+                  
+            })
+            dispatch({
+                type: UserConstants.GET_REALTIME_MESSAGES,
+                payload: { conversations }
+            })
+            console.log(conversations)
+        })    
+    }
+
+    
 }
