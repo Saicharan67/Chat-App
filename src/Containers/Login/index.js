@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { isLoggedInUser, signin } from '../../actions'
+import Header from '../../Components/Header'
 import Layout from '../../Components/layout'
 import Card from '../../Components/UI'
 import './style.css'
@@ -23,6 +24,7 @@ const LoginPage = (props) => {
     //     }
     // },[])
     const userLogin = (e) => {
+      document.getElementsByClassName('LoginButton').childNodes[0].display='block'
         e.preventDefault()
         if ( email== "" ){
            alert("Email Is Required")
@@ -38,41 +40,59 @@ const LoginPage = (props) => {
     if(auth.authenticated){
         return <Redirect to={'/'}/>
     }
+   
   return(
-    <Layout>
-        <div className='loginContainer'>
-        <Card children="Login">
-            <form onSubmit={userLogin}>
-                <input
-                name="email"
-                type='email'
-                value={email}
-                onChange={(e) =>{
-                   setEmail(e.target.value)
-                }}
-                placeholder="Email.."
-                >
-                </input>
-                <input
-                name="password"
-                type='password'
-                value={password}
-                onChange={(e) =>{
-                   setPassword(e.target.value)
-                }}
-                placeholder="Password.."
-                >
-                </input>
-                <div>
-                    <button>
-                        Login
-                    </button>
-                </div>
-            </form>
-        </Card>
-        </div>
+     <Layout>
+       <div className='body'>
+        <div className="app">
+        <div className='bg'>
        
-    </Layout>
+        <form>
+			<header>
+                <img 
+                src={require('../../assets/login.svg')}/>
+			</header>
+
+			<div className="inputs">
+				<input type="email" name="email" placeholder="Email"
+                  value={email}
+                  onChange={
+                      (e)=>{
+                          setEmail(e.target.value)
+                      }
+                  }
+                ></input>
+				<input type="password" name="password" placeholder="password"
+                 value={password}
+                 onChange={(e)=>{
+                     setPassword(e.target.value)
+                 }}
+                ></input>
+
+				<p className="light"><a href="#">Forgot password?</a></p>
+			</div>
+
+		</form>
+
+	
+
+       
+        </div>
+        <footer>
+            <button 
+             className='LoginButton'
+             onClick={userLogin}>
+             <i style={{display:'none', fontSize:'20px'}}className="fa fa-spinner fa-spin "> 
+            
+             
+             </i>Continue
+            </button>
+			<p>Don't have an account? <a href="signup" >Sign Up</a></p>
+		</footer>
+
+        </div>
+        </div>
+        </Layout>
    )
 
  }

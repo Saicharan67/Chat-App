@@ -4,6 +4,7 @@ import Card from '../../Components/UI'
 import {signup} from '../../actions'
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import './style.css'
 /**
 * @author
 * @function SignUpPage
@@ -16,6 +17,7 @@ const SignUpPage = (props) => {
     const dispatch = useDispatch();
     const auth = useSelector(state => state.auth)
 const registerUser = (e) => {
+    document.getElementsByClassName("SignUpButton")[0].innerHTML=`<i className="fa fa-spinner fa-spin">`;
     e.preventDefault()
     const user = {
         FirstName,LastName,email,password
@@ -29,11 +31,17 @@ if(auth.authenticated){
 
   return(
     <Layout>
-        <div className='registerContainer'>
-            <Card>
-                <form onSubmit={registerUser}>
-                    <h2>Sign Up</h2>
-                <input
+        <div className='body2'>
+        <div class="app2">
+        <div className='bg2'>
+       
+        <form className="signinform"
+        >
+        <img className="Signimg" src={require('../../assets/sign.svg')}/>
+
+			<div className="Signinputs"
+           >
+            <input
                 name="FirstName"
                 type='FirtName'
                 value={FirstName}
@@ -73,12 +81,22 @@ if(auth.authenticated){
                 placeholder="Password"
                 >
                 </input>
-                <button>
-                    SignUp
-                </button>
-                </form>
-            </Card>
 
+			</div>
+
+		</form>
+
+	    
+                
+       
+       
+        </div>
+        <footer>
+			<button className='SignUpButton' onClick={registerUser}>Sign Up</button>
+			<p className="p">Already a User ?<a href='login'>  Login</a></p>
+		</footer>
+
+        </div>
         </div>
     </Layout>
    )

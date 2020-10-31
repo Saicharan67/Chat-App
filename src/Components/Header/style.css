@@ -12,7 +12,7 @@
   font-size: 20px;
   color: #fff;
   text-transform: capitalize;
-  font-weight: bold;
+  font-weight: 3rem;
   margin: 18px;
   text-shadow: 0 0;
 }
@@ -44,5 +44,5 @@
 }
 
 .leftMenu > li > a.active {
-  font-weight: bold;
+  color: antiquewhite;
 }

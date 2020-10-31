@@ -6,6 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import firebase from 'firebase'
 import {Provider} from 'react-redux'
 import store from './store'
+import '../node_modules/font-awesome/css/font-awesome.min.css'; 
 const firebaseConfig = {
   apiKey: "AIzaSyBwgSea1nJXF2dr4CVgF7U9v4s8mYPOsCg",
   authDomain: "chat-app-f6ff0.firebaseapp.com",
