@@ -32,9 +32,9 @@
 }
 
 img {
-  margin-top: 1.6rem;
+  margin-top: 1rem;
   position: relative;
-  max-width: 90%;
+  max-width: 100%;
   left: 5rem;
 }
 
@@ -104,7 +104,7 @@ header {
 }
 
 form input {
-  width: 85%;
+  width: 80%;
   padding: 12px 12px;
   margin: 0.7em auto;
   border-radius: 100px;

@@ -75,6 +75,7 @@ const HomePage = (props) => {
              dispatch(getRealTimeConversations({uid_1: auth.uid,uid_2: user.uid }))
     } 
     const submitMsg = () => {
+        console.log('came')
          const msgObj ={
              user_uid_1: auth.uid,
              user_uid_2: UserUid,
@@ -86,7 +87,7 @@ const HomePage = (props) => {
                setmessage('')
              })
          }
-         //console.log(msgObj)
+         
     }
   return (
       <Layout>
@@ -131,11 +132,20 @@ const HomePage = (props) => {
         {
             ChatStarted?
             <div className="chatControls">
-                <textarea 
-                value={message}
-                onChange={(e)=> setmessage(e.target.value)}
-                placeholder='Enter Message'
-                />
+               <textarea
+               className='textarea' 
+               value={message}
+               placeholder='Enter Message'
+               onChange={(e)=> setmessage(e.target.value)}    
+               onKeyDown={(event)=>{
+                   if(event.key=='Enter'){
+                        return submitMsg()
+                       
+                   }
+               }}
+               >
+
+               </textarea>
                 <button className='SendButton' onClick={submitMsg}>Send</button>
             </div>: null
         }

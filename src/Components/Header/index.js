@@ -15,12 +15,12 @@ const Header = (props) => {
 
     
   return(
-    <header className="header">
+    <header className={auth.authenticated? "header" : 'loginheader'}>
         <div style={{display: 'flex'}}>
             <div className='logo'>Chat-App</div>
         </div>
        
-  <div style={{margin: '20px 0' , color: '#fff' , fontWeight: 'bold'}}>{auth.authenticated ? `Hi ${auth.FirstName} ${auth.LastName}`: ''}</div>
+  <div style={{margin: '20px 0' , color: '#fff' , fontWeight: '3rem'}}>{auth.authenticated ? `Hi ${auth.FirstName} ${auth.LastName}`: ''}</div>
         <ul className="menu">
           {
               auth.authenticated ? 

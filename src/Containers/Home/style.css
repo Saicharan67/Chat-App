@@ -21,11 +21,10 @@
   position: fixed;
   width: 70%;
   height: 40px;
-  background: #e2e0e0;
+  background-color: rgb(20, 241, 168);
   text-align: center;
   line-height: 40px;
-  color: #000;
-  font-weight: bold;
+
   font-family: "Poppins", sans-serif;
 }
 .chatControls {
@@ -35,7 +34,7 @@
   height: 50px;
   bottom: 0;
 }
-.chatControls textarea {
+.chatControls .textarea {
   width: 90%;
   outline: none;
   font-size: 1rem;
@@ -132,9 +131,7 @@
     height: 40px;
     background: #e2e0e0;
     text-align: center;
-    line-height: 40px;
-    color: #000;
-    font-weight: bold;
+
     font-family: "Poppins", sans-serif;
   }
   .chatControls {
@@ -144,10 +141,11 @@
     height: 50px;
     bottom: 0;
   }
-  .chatControls textarea {
+  .chatControls .textarea {
     font-size: 1.1rem;
     padding: 7px;
     width: 85%;
+    overflow-y: hidden;
   }
   .chatControls button {
     width: 15%;

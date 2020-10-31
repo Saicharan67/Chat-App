@@ -33,7 +33,7 @@
 
 .Signimg {
   position: relative;
-  max-width: 58%;
+  max-width: 65%;
   top: 0rem;
   left: 0rem;
 }
@@ -89,10 +89,10 @@ p {
 
 .signinform {
   position: relative;
-  top: 4.5rem;
-  left: 0rem;
+  top: 5.5rem;
+  left: 1.2rem;
   right: 0;
-  width: 100%;
+  width: 90%;
   text-align: center;
   padding: 2em;
 }
