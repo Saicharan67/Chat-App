@@ -136,7 +136,7 @@ const HomePage = (props) => {
                 onChange={(e)=> setmessage(e.target.value)}
                 placeholder='Enter Message'
                 />
-                <button onClick={submitMsg}>Send</button>
+                <button className='SendButton' onClick={submitMsg}>Send</button>
             </div>: null
         }
     </div>

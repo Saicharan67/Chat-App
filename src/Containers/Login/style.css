@@ -62,7 +62,8 @@ p {
   line-height: 2;
 }
 .light {
-  text-align: right;
+  text-align: left;
+  margin-right: 2rem;
   color: #fff;
 }
 .light a {
@@ -133,16 +134,18 @@ footer {
 
 button {
   width: 100%;
-  padding: 15px 15px;
+  padding: 13px 15px;
   border-radius: 100px;
   border: none;
   background: #1b5ff9;
   font-family: "Poppins", sans-serif;
   outline: none;
+  font-size: 1rem;
   color: #fff;
 }
 button:hover {
-  background: #034dfa;
+  background: #3670f7;
+  transform: scale(1.01, 1.01);
 }
 
 @media only screen and (min-device-width: 300px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {

@@ -131,7 +131,7 @@ footer {
   text-align: center;
 }
 
-button {
+/* button {
   width: 100%;
   padding: 15px 15px;
   border-radius: 100px;
@@ -140,7 +140,7 @@ button {
   font-family: "Poppins", sans-serif;
   outline: none;
   color: #fff;
-}
+} */
 
 @media only screen and (min-device-width: 300px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
   .app2 {
@@ -151,5 +151,14 @@ button {
   .bg2 {
     width: 380px;
     height: 610px;
+  }
+  .signinform {
+    position: relative;
+    top: 5.7rem;
+    left: 0rem;
+    right: 0;
+    width: 100%;
+    text-align: center;
+    padding: 2em;
   }
 }

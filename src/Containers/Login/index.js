@@ -17,14 +17,14 @@ const LoginPage = (props) => {
     const auth = useSelector(state => state.auth)
     const [email , setEmail] = useState('');
     const [password , setPassword] = useState('')
-
+    const [ButtonClicked,setButtonClicked]=useState(false)
     // useEffect(()=> {
     //     if(!auth.authenticated){
     //         dispatch(isLoggedInUser)
     //     }
     // },[])
     const userLogin = (e) => {
-      document.getElementsByClassName('LoginButton').childNodes[0].display='block'
+        setButtonClicked(true)
         e.preventDefault()
         if ( email== "" ){
            alert("Email Is Required")
@@ -41,6 +41,9 @@ const LoginPage = (props) => {
         return <Redirect to={'/'}/>
     }
    
+            
+             
+             
   return(
      <Layout>
        <div className='body'>
@@ -82,10 +85,12 @@ const LoginPage = (props) => {
             <button 
              className='LoginButton'
              onClick={userLogin}>
-             <i style={{display:'none', fontSize:'20px'}}className="fa fa-spinner fa-spin "> 
+                 {
+                  ButtonClicked ?
+                  <i style={{fontSize:'20px'}}className="fa fa-spinner fa-spin "></i>
+                  : 'Continue'
+                 }
             
-             
-             </i>Continue
             </button>
 			<p>Don't have an account? <a href="signup" >Sign Up</a></p>
 		</footer>

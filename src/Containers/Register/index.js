@@ -15,8 +15,12 @@ const SignUpPage = (props) => {
     const [email , setEmail] = useState('')
     const [password , setPassword] = useState('')
     const dispatch = useDispatch();
+    const [ButtonClicked,setButtonClicked]=useState(false)
     const auth = useSelector(state => state.auth)
+
+
 const registerUser = (e) => {
+    setButtonClicked(true)
     document.getElementsByClassName("SignUpButton")[0].innerHTML=`<i className="fa fa-spinner fa-spin">`;
     e.preventDefault()
     const user = {
@@ -86,13 +90,15 @@ if(auth.authenticated){
 
 		</form>
 
-	    
-                
-       
-       
         </div>
         <footer>
-			<button className='SignUpButton' onClick={registerUser}>Sign Up</button>
+			<button className='SignUpButton' onClick={registerUser}>
+            {
+                  ButtonClicked ?
+                  <i style={{fontSize:'20px'}}className="fa fa-spinner fa-spin "></i>
+                  : 'Sign Up'
+                 }
+            </button>
 			<p className="p">Already a User ?<a href='login'>  Login</a></p>
 		</footer>
 
