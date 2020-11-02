@@ -26,10 +26,10 @@ const User = props => {
     const {user ,onClick} = props;
 return(
                <div onClick={()=>onClick(user)} key={user.uid} className="displayName">
-                    <div className="displayPic">
-                        <img src="https://avatars1.githubusercontent.com/u/54733827?v=4" alt="Dp" />
-                    </div>
-                    <div style={{display: 'flex',flex: 1, justifyContent: 'space-between', margin: '0 10px'}}>
+                   
+                        <img className='Dp' src="https://avatars1.githubusercontent.com/u/54733827?v=4" alt="Dp" />
+                    
+                    <div className="displayPerson" style={{display: 'flex',flex: 1, justifyContent: 'space-between', margin: '0 10px'}}>
                         <span style={{fontWeight: 500}}>{user.FirstName} {user.LastName}</span>
                         <span className={user.isOnline ? 'onlineStatus': 'onlineStatus off'}>
                         </span>
@@ -68,14 +68,22 @@ const HomePage = (props) => {
     },[])
 
     const initChat = (user) => {
+        
              setChatStarted(true)
              setUserUid(user.uid)
              setChatUser( `${user.FirstName} ${user.LastName}`)
              console.log(user)
              dispatch(getRealTimeConversations({uid_1: auth.uid,uid_2: user.uid }))
+         
     } 
     const submitMsg = () => {
-        console.log('came')
+        
+        var chatHistory = document.getElementsByClassName("messageSections")[0];
+        
+       
+       
+        chatHistory.scrollTop = chatHistory.scrollHeight ;
+        console.log(chatHistory.scrollTop, chatHistory.scrollHeight)
          const msgObj ={
              user_uid_1: auth.uid,
              user_uid_2: UserUid,
@@ -91,7 +99,8 @@ const HomePage = (props) => {
     }
   return (
       <Layout>
-    <section className="container">
+          
+    <div className="container">
     <div className="listOfUsers">
        {
            user.users.length > 0 ? 
@@ -118,8 +127,8 @@ const HomePage = (props) => {
         <div className="messageSections">
             {
                 ChatStarted?
-                user.conversations.map(con=>
-                    <div style={{ textAlign: con.user_uid_1==auth.uid? 'right': 'left' }}>
+                user.conversations.map((con,id)=>
+                    <div key={id} style={{ textAlign: con.user_uid_1==auth.uid? 'right': 'left' }}>
                       <p className="messageStyle" >{con.message}</p>
                    </div>
                 )
@@ -132,25 +141,23 @@ const HomePage = (props) => {
         {
             ChatStarted?
             <div className="chatControls">
-               <textarea
-               className='textarea' 
-               value={message}
-               placeholder='Enter Message'
-               onChange={(e)=> setmessage(e.target.value)}    
+                <div style={{width: '90%'  ,position:"relative",display:'flex',justifyContent:'center',alignItems:'center'}}>
+               <input         
+               className='textarea' value={message} placeholder='Enter Message..' onChange={(e)=> setmessage(e.target.value)}    
                onKeyDown={(event)=>{
                    if(event.key=='Enter'){
-                        return submitMsg()
-                       
+                        return submitMsg()                
                    }
-               }}
-               >
+               }}></input>
+               </div>
 
-               </textarea>
+               
                 <button className='SendButton' onClick={submitMsg}>Send</button>
             </div>: null
         }
     </div>
-</section>
+</div>
+
 </Layout>
   );
 }
