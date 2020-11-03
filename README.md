@@ -1,3 +1,11 @@
+# Overview
+
+This is a Web Messenger Projects Built Using React as Frontend and Redux for State Management and Firebase for Authentication and Database..🙃🙃
+
+# Working
+
+User Should SignUp To Chat with Others.Once it done you can chat with anyone in UsersList By clicking On there Name.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
