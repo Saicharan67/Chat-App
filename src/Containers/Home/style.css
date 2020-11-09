@@ -28,27 +28,35 @@
   font-family: "Poppins", sans-serif;
 }
 .chatControls {
+  background-color: #f0f0f0;
   display: flex;
   position: fixed;
   width: 77%;
-  height: 50px;
+  height: 60px;
   bottom: 0;
 }
 .chatControls .textarea {
   width: 90%;
+  height: 40px;
   outline: none;
   font-size: 1rem;
   padding: 10px;
+  color: #1b5ff9;
   font-family: "Poppins", sans-serif;
+
+  border-radius: 20px;
 }
-.chatControls button {
-  width: 10%;
+.textarea::placeholder {
+  color: rgb(17, 17, 17);
 }
 .SendButton {
-  height: 50px;
+  width: 8%;
+  margin: auto;
+  padding: 5px;
+  height: 40px;
   color: #fff;
   background-color: #1b5ff9;
-  border-radius: 0%;
+  border-radius: 20px;
 }
 .displayName {
   display: flex;
@@ -56,6 +64,7 @@
   padding: 5px 10px;
   box-sizing: border-box;
   cursor: pointer;
+  border-bottom: 1px solid rgb(228, 227, 227);
 }
 
 .displayName.active {
@@ -82,7 +91,7 @@
 }
 
 .messageSections {
-  height: calc(100% - 90px);
+  height: calc(100% - 100px);
   width: 100%;
   overflow-x: hidden;
   position: relative;
@@ -115,9 +124,7 @@
   background: rgb(236, 47, 47);
   box-shadow: 0 0 0 0;
 }
-.textarea {
-  background-color: black;
-}
+
 @media only screen and (min-device-width: 300px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
   .container {
     display: flex;
