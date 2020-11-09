@@ -79,6 +79,10 @@
   left: 0;
   top: -0.5rem;
 }
+.startchat {
+  margin: 5rem 12rem;
+  max-width: 40%;
+}
 
 .messagestyleright {
   background: skyblue;

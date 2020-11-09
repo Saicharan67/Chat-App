@@ -47,8 +47,7 @@ const HomePage = (props) => {
    const [ChatUser,setChatUser] =useState('')
    const [message,setmessage] =useState('')
    const [UserUid,setUserUid] =useState('')
-   //console.log(user.conversations[0])
-   
+   console.log(user.conversations)
 
     useEffect(()=>{
        unsubscribe =  dispatch(getRealTimeUsers(auth.uid))
@@ -73,7 +72,7 @@ const HomePage = (props) => {
              setChatStarted(true)
              setUserUid(user.uid)
              setChatUser( `${user.FirstName} ${user.LastName}`)
-             console.log(user)
+            console.log(user)
              dispatch(getRealTimeConversations({uid_1: auth.uid,uid_2: user.uid }))
          
     } 
@@ -132,11 +131,13 @@ const HomePage = (props) => {
                 user.conversations.map((con,id)=>
                     <div key={id} className={con.user_uid_1==auth.uid? 'sent': 'received'}   style={{ textAlign: con.user_uid_1==auth.uid? 'right': 'left' , marginTop: id==0? '15px': '2px'}}>
                         
+            {/* <p className={con.user_uid_1==auth.uid ?'messagestyleright':'messagestyleleft'}>{con.message}</p> */}
                       <p className={con.user_uid_1==auth.uid ? id==0 || user.conversations[id-1].user_uid_1!=auth.uid?'messagestyleright': 'normalrightmessage': id==0 || user.conversations[id-1].user_uid_1==auth.uid?'messagestyleleft':'normalleftmessage' } >{con.message}</p>
                    </div>
                 )
                 
-                : ""
+                : <img className='startchat'
+                src={require('../../assets/StartChat2.svg')}/>
             
            
             }
