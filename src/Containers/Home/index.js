@@ -47,7 +47,7 @@ const HomePage = (props) => {
    const [ChatUser,setChatUser] =useState('')
    const [message,setmessage] =useState('')
    const [UserUid,setUserUid] =useState('')
-
+   //console.log(user.conversations[0])
    
 
     useEffect(()=>{
@@ -69,7 +69,7 @@ const HomePage = (props) => {
     },[])
 
     const initChat = (user) => {
-        
+            
              setChatStarted(true)
              setUserUid(user.uid)
              setChatUser( `${user.FirstName} ${user.LastName}`)
@@ -128,9 +128,11 @@ const HomePage = (props) => {
         <div className="messageSections">
             {
                 ChatStarted?
+                
                 user.conversations.map((con,id)=>
-                    <div key={id} style={{ textAlign: con.user_uid_1==auth.uid? 'right': 'left' }}>
-                      <p className="messageStyle" >{con.message}</p>
+                    <div key={id} className={con.user_uid_1==auth.uid? 'sent': 'received'}   style={{ textAlign: con.user_uid_1==auth.uid? 'right': 'left' , marginTop: id==0? '15px': '2px'}}>
+                        
+                      <p className={con.user_uid_1==auth.uid ? id==0 || user.conversations[id-1].user_uid_1!=auth.uid?'messagestyleright': 'normalrightmessage': id==0 || user.conversations[id-1].user_uid_1==auth.uid?'messagestyleleft':'normalleftmessage' } >{con.message}</p>
                    </div>
                 )
                 
