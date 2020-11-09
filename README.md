@@ -1,6 +1,6 @@
 # Overview
 
-This is a Web Messenger Projects Built Using React as Frontend and Redux for State Management and Firebase for Authentication and Database..🙃🙃
+This is a Web Messenger Project Built By React as Frontend and Redux for State Management and Firebase for Authentication and Database..🙃🙃
 
 # Working
 
