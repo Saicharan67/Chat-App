@@ -10,6 +10,7 @@
   height: 100%;
   overflow-x: hidden;
   border-right: 1px solid #ccc;
+  background-color: rgb(20, 108, 241);
 }
 .chatArea {
   width: 77%;
@@ -21,7 +22,7 @@
   position: fixed;
   width: 77%;
   height: 40px;
-  background-color: rgb(20, 241, 168);
+  background-color: rgb(20, 108, 241);
   text-align: center;
   line-height: 40px;
 
@@ -64,7 +65,8 @@
   padding: 5px 10px;
   box-sizing: border-box;
   cursor: pointer;
-  border-bottom: 1px solid rgb(228, 227, 227);
+  color: #ffffff;
+  border-bottom: 1px solid rgb(170, 170, 170);
 }
 
 .displayName.active {
@@ -80,16 +82,18 @@
   top: -0.5rem;
 }
 .startchat {
-  margin: 5rem 12rem;
-  max-width: 40%;
+  position: absolute;
+  align-items: center;
+  margin: 18vh 18vw;
+  width: 40%;
 }
 
 .messagestyleright {
   background: skyblue;
   display: inline-block;
-  padding: 3px 10px;
+  padding: 1px 10px;
   border-radius: 10px;
-
+  max-width: 40%;
   margin: 1px;
   margin-top: 2px;
   display: inline-block;
@@ -112,9 +116,10 @@
 .normalrightmessage {
   background: skyblue;
   display: inline-block;
-  padding: 3px 10px;
+  padding: 1px 10px;
   border-radius: 10px;
   margin: 1px;
+  max-width: 40%;
   display: inline-block;
   font-size: 0.9rem;
   text-align: center;
@@ -123,9 +128,10 @@
 .normalleftmessage {
   background: skyblue;
   display: inline-block;
-  padding: 3px 10px;
+  padding: 1px 10px;
   border-radius: 10px;
   margin: 1px;
+  max-width: 40%;
   display: inline-block;
   font-size: 0.9rem;
   text-align: center;
@@ -134,8 +140,9 @@
 .messagestyleleft {
   background: skyblue;
   display: inline-block;
-  padding: 3px 10px;
+  padding: 1px 10px;
   border-radius: 10px;
+  max-width: 40%;
   margin: 1px;
   display: inline-block;
   font-size: 0.9rem;
@@ -162,10 +169,10 @@
   top: 40px;
 }
 .sent {
-  margin-right: 1rem;
+  margin-right: 3rem;
 }
 .received {
-  margin-left: 1rem;
+  margin-left: 3rem;
 }
 .messageSections::-webkit-scrollbar {
   width: 9px;
@@ -183,16 +190,9 @@
   justify-content: center;
   align-items: center;
 }
-.onlineStatus {
-  width: 10px;
-  height: 10px;
-  background: rgb(35, 224, 29);
-  border-radius: 50%;
-  box-shadow: 0 0 10px 0 rgb(35, 224, 29);
+.onlineStatus:before {
 }
 .onlineStatus.off {
-  background: rgb(236, 47, 47);
-  box-shadow: 0 0 0 0;
 }
 
 @media only screen and (min-device-width: 300px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
@@ -246,5 +246,15 @@
     overflow-x: hidden;
     position: relative;
     top: 4px;
+  }
+  .startchat {
+    margin: 23vh 14vw;
+    width: 50%;
+  }
+  .sent {
+    margin-right: 1rem;
+  }
+  .received {
+    margin-left: 1rem;
   }
 }
