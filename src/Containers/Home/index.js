@@ -73,6 +73,7 @@ const HomePage = (props) => {
     },[])
 
     const initChat = (talkingwith ,e) => {
+          
              console.log(e.target.className)
              const nusers=document.getElementsByClassName('displayName')
              console.log(nusers)
@@ -145,7 +146,7 @@ const HomePage = (props) => {
                     <div key={id} className={con.user_uid_1==auth.uid? 'sent': 'received'}   style={{ textAlign: con.user_uid_1==auth.uid? 'right': 'left' , marginTop: id==0? '15px': '2px'}}>
                         
             {/* <p className={con.user_uid_1==auth.uid ?'messagestyleright':'messagestyleleft'}>{con.message}</p> */}
-                      <p className={con.user_uid_1==auth.uid ? id==0 || user.conversations[id-1].user_uid_1!=auth.uid?'messagestyleright': 'normalrightmessage': id==0 || user.conversations[id-1].user_uid_1==auth.uid?'messagestyleleft':'normalleftmessage' } >{con.message}</p>
+                      <p className={con.user_uid_1==auth.uid ? id==0 || user.conversations[id-1].user_uid_1!=auth.uid?'messagestyleright': 'normalrightmessage': id==0 || user.conversations[id-1].user_uid_1==auth.uid?'messagestyleleft':'normalleftmessage' } >{con.message} </p>
                    </div>
                 )
                 

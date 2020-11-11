@@ -78,7 +78,7 @@
   transform: scale(1.05, 1.05);
   color: #fff;
 }
-.active {
+.displayName.active {
   background: #1b5ff9;
   color: #fff;
   box-shadow: 5px 4px 23px 5px rgba(132, 132, 132, 0.75);

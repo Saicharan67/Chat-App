@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {NavLink,Link} from 'react-router-dom'
 import './style.css'
@@ -11,7 +11,7 @@ import {logout} from '../../actions'
 const Header = (props) => {
     const auth = useSelector(state => state.auth)
     const dispatch = useDispatch()
-    
+    const [logoutclicked,setlogoutclicked] = useState(false)
 
     
   return(
@@ -25,9 +25,16 @@ const Header = (props) => {
           {
               auth.authenticated ? 
               <li>
-              <Link to={"#"} onClick={()=>{
+              <Link className='logout' to={"#"} onClick={()=>{
+                setlogoutclicked(true)
                 dispatch(logout(auth.uid))
-              }}>Logout</Link>
+              }}>{
+                
+                 logoutclicked ?
+                 <i style={{fontSize:'20px'}}className="fa fa-spinner fa-spin "></i>
+                 : 'Logout'
+                 
+              }</Link>
               </li>
               :null
 
