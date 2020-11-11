@@ -30,7 +30,7 @@ return(
                         <img className='Dp' src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTr3k-GgfticbNEipXYeXapEpiiawOSHjXfsQ&usqp=CAU" alt="Dp" />
                         {/* <img className='Dp' src="https://pikmail.herokuapp.com/mahankalisaicharan@gmail.com?size=50" alt="Profile Picture"></img> */}
                     
-                    <div className="displayPerson" style={{display: 'flex',flex: 1, justifyContent: 'space-between', margin: '0 10px'}}>
+                    <div className="displayPerson" style={{display: 'flex',flex: 1, justifyContent: 'space-between', margin: '0 10px',pointerEvents: 'none'}}>
                         <span style={{fontWeight: 500}}>{user.FirstName} {user.LastName}</span>
                         <span className={user.isOnline ? 'onlineStatus':'onlineStatus off' }>
                             {
@@ -73,6 +73,14 @@ const HomePage = (props) => {
     },[])
 
     const initChat = (talkingwith ,e) => {
+             console.log(e.target.className)
+             const nusers=document.getElementsByClassName('displayName')
+             console.log(nusers)
+            for(let i = 0; i<nusers.length; i++ ){
+                nusers[i].className='displayName'
+               
+            }
+             e.target.className='displayName active'
             
              setChatStarted(true)
              setUserUid(talkingwith.uid)

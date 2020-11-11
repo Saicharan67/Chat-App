@@ -67,6 +67,7 @@
   padding: 10px 10px;
   box-sizing: border-box;
   cursor: pointer;
+
   color: #020202;
   border-bottom: 1px solid rgb(226, 226, 226);
 }
@@ -77,8 +78,10 @@
   transform: scale(1.05, 1.05);
   color: #fff;
 }
-.displayNameActive {
+.active {
   background: #1b5ff9;
+  color: #fff;
+  box-shadow: 5px 4px 23px 5px rgba(132, 132, 132, 0.75);
 }
 
 .Dp {
@@ -176,6 +179,7 @@
   position: relative;
   top: 40px;
   overflow: overlay;
+  background-color: azure;
 }
 .sent {
   margin-right: 3rem;
