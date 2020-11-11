@@ -25,7 +25,7 @@ import { getRealTimeConversations, getRealTimeUsers, updateMessage } from '../..
 const User = props => {
     const {user ,onClick} = props;
 return(
-               <div onClick={()=>onClick(user)} key={user.uid} className="displayName">
+               <div onClick={(e)=>onClick(user,e)} key={user.uid} className="displayName">
                        
                         <img className='Dp' src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTr3k-GgfticbNEipXYeXapEpiiawOSHjXfsQ&usqp=CAU" alt="Dp" />
                         {/* <img className='Dp' src="https://pikmail.herokuapp.com/mahankalisaicharan@gmail.com?size=50" alt="Profile Picture"></img> */}
@@ -72,7 +72,7 @@ const HomePage = (props) => {
         }
     },[])
 
-    const initChat = (talkingwith) => {
+    const initChat = (talkingwith ,e) => {
             
              setChatStarted(true)
              setUserUid(talkingwith.uid)

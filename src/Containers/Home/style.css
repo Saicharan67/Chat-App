@@ -1,5 +1,7 @@
 .container {
   display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   width: 100%;
   height: calc(100% - 60px);
@@ -9,8 +11,8 @@
   width: 23%;
   height: 100%;
   overflow-x: hidden;
-  border-right: 1px solid #ccc;
-  background-color: rgb(20, 108, 241);
+  /* border-right: 1px solid #ccc; */
+  background-color: rgb(255, 255, 255);
 }
 .chatArea {
   width: 77%;
@@ -25,7 +27,7 @@
   background-color: rgb(20, 108, 241);
   text-align: center;
   line-height: 40px;
-
+  color: #fff;
   font-family: "Poppins", sans-serif;
 }
 .chatControls {
@@ -62,15 +64,21 @@
 .displayName {
   display: flex;
   align-items: center;
-  padding: 5px 10px;
+  padding: 10px 10px;
   box-sizing: border-box;
   cursor: pointer;
-  color: #ffffff;
-  border-bottom: 1px solid rgb(170, 170, 170);
+  color: #020202;
+  border-bottom: 1px solid rgb(226, 226, 226);
 }
 
-.displayName.active {
-  background: #ccc;
+.displayName:hover {
+  transition: all 0.3s ease-in-out;
+  background: #1b5ff9;
+  transform: scale(1.05, 1.05);
+  color: #fff;
+}
+.displayNameActive {
+  background: #1b5ff9;
 }
 
 .Dp {
@@ -167,6 +175,7 @@
   overflow-x: hidden;
   position: relative;
   top: 40px;
+  overflow: overlay;
 }
 .sent {
   margin-right: 3rem;
@@ -175,25 +184,28 @@
   margin-left: 3rem;
 }
 .messageSections::-webkit-scrollbar {
-  width: 9px;
+  width: 6px;
+  background: white;
 }
 .messageSections::-webkit-scrollbar-track {
-  background: rgb(211, 211, 211);
+  background: rgb(255, 255, 255);
 }
 .messageSections::-webkit-scrollbar-thumb {
-  background-color: rgb(112, 112, 112);
+  background-color: rgb(180, 180, 180);
   border-radius: 20px;
-  border: 2px solid rgb(212, 212, 212);
+}
+.messageSections::-webkit-scrollbar-track-piece {
+  display: none;
 }
 .displayPerson {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.onlineStatus:before {
+/* .onlineStatus:before {
 }
 .onlineStatus.off {
-}
+} */
 
 @media only screen and (min-device-width: 300px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
   .container {
