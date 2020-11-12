@@ -21,7 +21,7 @@
 import React, { useEffect, useState } from 'react';
 import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { getRealTimeConversations, getRealTimeUsers, updateMessage ,UpdateRealTimeView} from '../../actions/user.actions';
+import { getRealTimeConversations, getRealTimeUsers, updateMessage ,UpdateRealTimeView,getRealTimeNumberOfMessages} from '../../actions/user.actions';
 const User = props => {
     const {user ,onClick} = props;
 return(
@@ -53,7 +53,7 @@ const HomePage = (props) => {
    const [message,setmessage] =useState('')
    const [UserUid,setUserUid] =useState('')
    
-
+    
     useEffect(()=>{
        unsubscribe =  dispatch(getRealTimeUsers(auth.uid))
           .then((unsubscribe)=>{
@@ -71,7 +71,10 @@ const HomePage = (props) => {
             unsubscribe.then(f=>f()).catch(err=>console.log(err))
         }
     },[])
-
+    useEffect(()=>{
+        
+        dispatch(getRealTimeNumberOfMessages(auth.uid))
+ },[])
     const initChat = (talkingwith ,e) => {
              dispatch(UpdateRealTimeView({uid_1: auth.uid, uid_2: talkingwith.uid  }))
              console.log(e.target.className)
