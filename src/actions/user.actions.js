@@ -8,7 +8,6 @@ return async dispatch => {
     });
     const db =firestore()
    const unsubscribe = db.collection("users")
-   // .where("uid", "!=",uid)
     .onSnapshot((querySnapshot)=> {
         const  users = [];
         querySnapshot.forEach(function(doc) {
@@ -94,22 +93,22 @@ export const getRealTimeNumberOfMessages = (uid) => {
             querySnapshot.forEach(doc=>{
                
                if( doc.data().user_uid_2=uid &&  doc.data().isView == false){
-              
                               // console.log(doc.data().user_uid_1 , doc.data().isView, doc.data().message)
                                newMessages[doc.data().user_uid_1] = newMessages[doc.data().user_uid_1]?newMessages[doc.data().user_uid_1]+1:1
-               }
-
-                
-                  
+               }                 
             })
-          console.log(newMessages)
-            
+            console.log(newMessages)
            
+            dispatch({
+                type: UserConstants.GET_REALTIME_NEW_MESSAGES,
+                payload: {newMessages}
+            })
+          
+         
         })    
-        dispatch({
-            type: UserConstants.GET_REALTIME_NEW_MESSAGES,
-            payload: { newMessages }
-        })
+        
+       
+       
         
        
 }

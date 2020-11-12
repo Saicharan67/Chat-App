@@ -23,10 +23,10 @@ export default (state = initstate,action) => {
         }
         break
     case UserConstants.GET_REALTIME_NEW_MESSAGES:
-        console.log(action.payload.Newmessages)
+       
         state={
             ...state,
-            newmessages: action.payload.Newmessages
+            newmessages: action.payload.newMessages
         }
         break
     }

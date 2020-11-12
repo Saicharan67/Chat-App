@@ -23,12 +23,13 @@ import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRealTimeConversations, getRealTimeUsers, updateMessage ,UpdateRealTimeView,getRealTimeNumberOfMessages} from '../../actions/user.actions';
 const User = props => {
-    const {user ,onClick} = props;
+    const {user ,onClick,newmessages} = props;
 return(
                <div onClick={(e)=>onClick(user,e)} key={user.uid} className="displayName">
                        
                         <img className='Dp' src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTr3k-GgfticbNEipXYeXapEpiiawOSHjXfsQ&usqp=CAU" alt="Dp" />
-                        {/* <img className='Dp' src="https://pikmail.herokuapp.com/mahankalisaicharan@gmail.com?size=50" alt="Profile Picture"></img> */}
+                        <p>{newmessages[user.uid]?newmessages[user.uid]:''}</p>
+                        
                     
                     <div className="displayPerson" style={{display: 'flex',flex: 1, justifyContent: 'space-between', margin: '0 10px',pointerEvents: 'none'}}>
                         <span style={{fontWeight: 500}}>{user.FirstName} {user.LastName}</span>
@@ -52,8 +53,8 @@ const HomePage = (props) => {
    const [ChatUser,setChatUser] =useState('')
    const [message,setmessage] =useState('')
    const [UserUid,setUserUid] =useState('')
-   
-    
+   const newMessages = user.newmessages
+  
     useEffect(()=>{
        unsubscribe =  dispatch(getRealTimeUsers(auth.uid))
           .then((unsubscribe)=>{
@@ -123,7 +124,7 @@ const HomePage = (props) => {
            user.users.length > 0 ? 
            user.users.map(user => {
                return(
-                 <User onClick={initChat} key={user.uid} user={user}/>
+                 <User onClick={initChat} key={user.uid} user={user} newmessages={newMessages}/>
                )
            })
            : null
