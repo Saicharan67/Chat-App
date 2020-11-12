@@ -21,7 +21,7 @@
 import React, { useEffect, useState } from 'react';
 import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { getRealTimeConversations, getRealTimeUsers, updateMessage } from '../../actions/user.actions';
+import { getRealTimeConversations, getRealTimeUsers, updateMessage ,UpdateRealTimeView} from '../../actions/user.actions';
 const User = props => {
     const {user ,onClick} = props;
 return(
@@ -73,14 +73,14 @@ const HomePage = (props) => {
     },[])
 
     const initChat = (talkingwith ,e) => {
-          
+             dispatch(UpdateRealTimeView({uid_1: auth.uid, uid_2: talkingwith.uid  }))
              console.log(e.target.className)
              const nusers=document.getElementsByClassName('displayName')
              console.log(nusers)
-            for(let i = 0; i<nusers.length; i++ ){
+             for(let i = 0; i<nusers.length; i++ ){
                 nusers[i].className='displayName'
                
-            }
+             }
              e.target.className='displayName active'
             
              setChatStarted(true)

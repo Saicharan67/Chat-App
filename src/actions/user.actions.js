@@ -80,3 +80,60 @@ export const getRealTimeConversations =(user)=> {
 
     
 }
+export const UpdateRealTimeView = (user) => {
+    return async dispatch => {
+        const db =firestore()
+      
+        db.collection('conversation')
+        .where('user_uid_1','in',[user.uid_1,user.uid_2])
+        .orderBy('createdAt','asc')
+        .onSnapshot((querySnapshot)=>{
+           
+            querySnapshot.forEach(doc=>{
+                if(
+                    ((doc.data().user_uid_1 == user.uid_1 && doc.data().user_uid_2 == user.uid_2)
+                    || 
+                    (doc.data().user_uid_1 == user.uid_2 && doc.data().user_uid_2 == user.uid_1)) && doc.data().isView==false
+                ){
+                   if(doc.data().user_uid_1 == user.uid_2 && doc.data().user_uid_2 == user.uid_1){
+                    db.collection('conversation')
+                    .doc(doc.id)
+                    .update({
+                        isView: true
+                    })
+                }
+                }
+
+                
+                  
+            })
+            
+        })    
+        
+        
+       
+}
+}
+export const getRealTimeNumberOfMessages = (user) => {
+    return async dispatch => {
+        const db =firestore()
+      
+        db.collection('conversation')
+        .where('user_uid_1','in',[user.uid_1])
+        .onSnapshot((querySnapshot)=>{
+            const NewMessages={}
+            querySnapshot.forEach(doc=>{
+               if(doc.data().user_uid_2==user.uid_1 && doc.data().isView == false){
+                                NewMessages[doc.data().user_uid_1]=NewMessages[doc.data().user_uid_1]?NewMessages[doc.data().user_uid_1]+1:1
+               }
+
+                
+                  
+            })
+            console.log(NewMessages)
+        })    
+        
+        
+       
+}
+}
