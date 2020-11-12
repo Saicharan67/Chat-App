@@ -27,34 +27,7 @@ return async dispatch => {
 }
 }
 
-export const getRealTimeNumberOfMessages = (uid) => {
-   
-    return async dispatch => {
-        const db =firestore()
-        
-        db.collection('conversation')
-       
-        .onSnapshot((querySnapshot)=>{
-            const NewMessages={}
-            querySnapshot.forEach(doc=>{
-               
-               if( doc.data().user_uid_2=uid &&  doc.data().isView == false){
-              
-                               console.log(doc.data().user_uid_1 , doc.data().isView, doc.data().message)
-                               NewMessages[doc.data().user_uid_1] = NewMessages[doc.data().user_uid_1]?NewMessages[doc.data().user_uid_1]+1:1
-               }
 
-                
-                  
-            })
-            console.log(NewMessages)
-           
-        })    
-        
-        
-       
-}
-}
 
 export const updateMessage = (msgObj) => {
     return async dispatch => {
@@ -108,6 +81,38 @@ export const getRealTimeConversations =(user)=> {
     }
 
     
+}
+export const getRealTimeNumberOfMessages = (uid) => {
+   
+    return async dispatch => {
+        const db =firestore()
+        const newMessages={}
+        db.collection('conversation')
+       
+        .onSnapshot((querySnapshot)=>{
+            
+            querySnapshot.forEach(doc=>{
+               
+               if( doc.data().user_uid_2=uid &&  doc.data().isView == false){
+              
+                              // console.log(doc.data().user_uid_1 , doc.data().isView, doc.data().message)
+                               newMessages[doc.data().user_uid_1] = newMessages[doc.data().user_uid_1]?newMessages[doc.data().user_uid_1]+1:1
+               }
+
+                
+                  
+            })
+          console.log(newMessages)
+            
+           
+        })    
+        dispatch({
+            type: UserConstants.GET_REALTIME_NEW_MESSAGES,
+            payload: { newMessages }
+        })
+        
+       
+}
 }
 export const UpdateRealTimeView = (user) => {
     return async dispatch => {
