@@ -27,7 +27,11 @@ const User = props => {
 return(
                <div onClick={(e)=>onClick(user,e)} key={user.uid} className="displayName">
                    <div className='item'>
-                        <span className="notify-badge">{newmessages[user.uid]?newmessages[user.uid]:''}</span>
+                       {
+                         newmessages[user.uid] ? 
+                        <span className="notify-badge">{newmessages[user.uid]}</span>
+                        :''
+                       }
                         <img className='Dp' src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTr3k-GgfticbNEipXYeXapEpiiawOSHjXfsQ&usqp=CAU" alt="Dp" />
                     </div>
                         
@@ -55,7 +59,7 @@ const HomePage = (props) => {
    const [message,setmessage] =useState('')
    const [UserUid,setUserUid] =useState('')
    const newMessages = user.newmessages
-  console.log(newMessages)
+  
     useEffect(()=>{
        unsubscribe =  dispatch(getRealTimeUsers(auth.uid))
           .then((unsubscribe)=>{
@@ -78,11 +82,12 @@ const HomePage = (props) => {
         dispatch(getRealTimeNumberOfMessages(auth.uid))
  },[])
     const initChat = (talkingwith ,e) => {
+        console.log('calling')
              dispatch(UpdateRealTimeView({uid_1: auth.uid, uid_2: talkingwith.uid  }))
              
-             console.log(e.target.className)
+             
              const nusers=document.getElementsByClassName('displayName')
-             console.log(nusers)
+            
              for(let i = 0; i<nusers.length; i++ ){
                 nusers[i].className='displayName'
                

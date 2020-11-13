@@ -93,12 +93,11 @@ export const getRealTimeNumberOfMessages = (uid) => {
             querySnapshot.forEach(doc=>{
                
                if( doc.data().user_uid_2==uid ){
-                               console.log(doc.data().user_uid_1 , doc.data().isView, doc.data().message)
+                              // console.log(doc.data().user_uid_1 , doc.data().isView, doc.data().message)
                                newMessages[doc.data().user_uid_1] = newMessages[doc.data().user_uid_1]?newMessages[doc.data().user_uid_1]+1:1
                }                 
             })
-            console.log(newMessages)
-           
+            
             dispatch({
                 type: UserConstants.GET_REALTIME_NEW_MESSAGES,
                 payload: {newMessages}
