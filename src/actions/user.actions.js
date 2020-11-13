@@ -87,13 +87,13 @@ export const getRealTimeNumberOfMessages = (uid) => {
         const db =firestore()
         const newMessages={}
         db.collection('conversation')
-       
+        .where('isView','==', false)
         .onSnapshot((querySnapshot)=>{
             
             querySnapshot.forEach(doc=>{
                
-               if( doc.data().user_uid_2=uid &&  doc.data().isView == false){
-                              // console.log(doc.data().user_uid_1 , doc.data().isView, doc.data().message)
+               if( doc.data().user_uid_2==uid ){
+                               console.log(doc.data().user_uid_1 , doc.data().isView, doc.data().message)
                                newMessages[doc.data().user_uid_1] = newMessages[doc.data().user_uid_1]?newMessages[doc.data().user_uid_1]+1:1
                }                 
             })
