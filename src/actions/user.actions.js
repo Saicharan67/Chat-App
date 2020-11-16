@@ -54,7 +54,7 @@ export const getRealTimeConversations =(user)=> {
     return async dispatch => {
         const db =firestore()
         db.collection('conversation')
-        .where('user_uid_1','in',[user.uid_1,user.uid_2])
+       // .where('user_uid_1','in',[user.uid_1,user.uid_2])
         .orderBy('createdAt','asc')
         .onSnapshot((querySnapshot)=>{
             const conversations = []

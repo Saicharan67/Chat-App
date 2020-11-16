@@ -270,8 +270,9 @@
   }
   .chatControls .textarea {
     font-size: 1.1rem;
-    padding: 7px;
+    padding: 10px;
     width: 85%;
+
     overflow-y: hidden;
   }
   .chatControls button {
