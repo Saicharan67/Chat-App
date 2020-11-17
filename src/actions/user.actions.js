@@ -42,7 +42,7 @@ export const updateMessage = (msgObj) => {
             //     type: UserConstants. GET_REALTIME_MESSAGES,
                 
             // })
-            console.log(data)
+            console.log(data,'msg updated')
         })
         .catch(err=>{
             console.log(err)
@@ -93,7 +93,7 @@ export const getRealTimeNumberOfMessages = (uid) => {
             querySnapshot.forEach(doc=>{
                
                if( doc.data().user_uid_2==uid ){
-                              // console.log(doc.data().user_uid_1 , doc.data().isView, doc.data().message)
+                             
                                newMessages[doc.data().user_uid_1] = newMessages[doc.data().user_uid_1]?newMessages[doc.data().user_uid_1]+1:1
                }                 
             })
@@ -112,29 +112,26 @@ export const getRealTimeNumberOfMessages = (uid) => {
        
 }
 }
-export const UpdateRealTimeView = (user) => {
-    return async dispatch => {
-        const db =firestore()
-      
+export const UpdateRealTimeView = (u) => {
+    return () => {
+        const db = firestore()
+        
         db.collection('conversation')
-        .where('user_uid_1','in',[user.uid_1,user.uid_2])
-        .orderBy('createdAt','asc')
+        .where('isView','==', false)
         .onSnapshot((querySnapshot)=>{
            
             querySnapshot.forEach(doc=>{
-                if(
-                    ((doc.data().user_uid_1 == user.uid_1 && doc.data().user_uid_2 == user.uid_2)
-                    || 
-                    (doc.data().user_uid_1 == user.uid_2 && doc.data().user_uid_2 == user.uid_1)) && doc.data().isView==false
-                ){
-                   if(doc.data().user_uid_1 == user.uid_2 && doc.data().user_uid_2 == user.uid_1){
+              
+                   if( doc.data().user_uid_1==u.uid_2 && doc.data().user_uid_2==u.uid_1){
                     db.collection('conversation')
                     .doc(doc.id)
                     .update({
                         isView: true
                     })
+                    console.log('view updated',doc.data().user_uid_1,doc.data().user_uid_2)
+                    console.log(u.uid_2,u.uid_1)
                 }
-                }
+                
 
                 
                   
