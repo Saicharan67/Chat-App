@@ -1,3 +1,9 @@
+@font-face {
+  font-family: "FontAwesome";
+
+  src: url("https://font-awesome/fontawesome-webfont.ttf") t("truetype") forma;
+}
+
 .container {
   display: flex;
   justify-content: center;
@@ -134,7 +140,6 @@
   position: relative;
 }
 .messagestyleright:before {
-  content: "";
   width: 0px;
   height: 0px;
   position: absolute;
