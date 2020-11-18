@@ -82,10 +82,9 @@ const HomePage = (props) => {
         dispatch(getRealTimeNumberOfMessages(auth.uid))
  },[])
     const initChat = (talkingwith ,e) => {
-       
-             
-             
-             
+            setUserUid(talkingwith.uid)
+            setChatUser( `${talkingwith.FirstName} ${talkingwith.LastName}`)
+          
              const nusers=document.getElementsByClassName('displayName')
             
              for(let i = 0; i<nusers.length; i++ ){
@@ -93,17 +92,18 @@ const HomePage = (props) => {
                
              }
              e.target.className='displayName active'
-            
-            
-             setUserUid(talkingwith.uid)
-             setChatUser( `${talkingwith.FirstName} ${talkingwith.LastName}`)
-             dispatch(getRealTimeNumberOfMessages(auth.uid))
+               
              dispatch(getRealTimeConversations({uid_1: auth.uid, uid_2: talkingwith.uid  }))
+             dispatch(getRealTimeNumberOfMessages(auth.uid))
+            
+             
+            
+            
              setChatStarted(true)
              console.log(auth.uid,talkingwith.uid)
-             if(newMessages){
-                dispatch(UpdateRealTimeView({uid_1: auth.uid, uid_2: talkingwith.uid  }))
-             }
+            
+             dispatch(UpdateRealTimeView({uid_1: auth.uid, uid_2: talkingwith.uid  }))
+        
          
     } 
     const submitMsg = () => {

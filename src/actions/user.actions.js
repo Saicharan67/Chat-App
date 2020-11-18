@@ -65,18 +65,19 @@ export const getRealTimeConversations =(user)=> {
                     (doc.data().user_uid_1 == user.uid_2 && doc.data().user_uid_2 == user.uid_1)
                 ){
                     conversations.push(doc.data())
+                   
 
                 }
-
-
+                
                   
             })
             dispatch({
                 type: UserConstants.GET_REALTIME_MESSAGES,
                 payload: { conversations }
             })
-            console.log(conversations)
+            //console.log(conversations)
         })    
+        
     }
 
     
@@ -115,14 +116,14 @@ export const getRealTimeNumberOfMessages = (uid) => {
 export const UpdateRealTimeView = (u) => {
     return () => {
         const db = firestore()
-        
+        console.log('caming',u.uid_2,u.uid_1)
         db.collection('conversation')
         .where('isView','==', false)
         .onSnapshot((querySnapshot)=>{
            
             querySnapshot.forEach(doc=>{
               
-                   if( doc.data().user_uid_1==u.uid_2 && doc.data().user_uid_2==u.uid_1){
+                   if( doc.data().user_uid_1 == u.uid_2 && doc.data().user_uid_2 == u.uid_1){
                     db.collection('conversation')
                     .doc(doc.id)
                     .update({
