@@ -11,7 +11,7 @@ return async dispatch => {
     .onSnapshot((querySnapshot)=> {
         const  users = [];
         querySnapshot.forEach(function(doc) {
-            if(doc.data().uid!= uid){
+            if(doc.data().uid !== uid){
                 users.push(doc.data());
             }
          
@@ -60,9 +60,9 @@ export const getRealTimeConversations =(user)=> {
             const conversations = []
             querySnapshot.forEach(doc=>{
                 if(
-                    (doc.data().user_uid_1 == user.uid_1 && doc.data().user_uid_2 == user.uid_2)
+                    (doc.data().user_uid_1 === user.uid_1 && doc.data().user_uid_2 === user.uid_2)
                     || 
-                    (doc.data().user_uid_1 == user.uid_2 && doc.data().user_uid_2 == user.uid_1)
+                    (doc.data().user_uid_1 === user.uid_2 && doc.data().user_uid_2 === user.uid_1)
                 ){
                     conversations.push(doc.data())
                    
@@ -71,11 +71,13 @@ export const getRealTimeConversations =(user)=> {
                 
                   
             })
+           
+                console.log(user.uid_1,user.uid_2)
             dispatch({
                 type: UserConstants.GET_REALTIME_MESSAGES,
                 payload: { conversations }
             })
-            //console.log(conversations)
+            console.log(conversations)
         })    
         
     }
@@ -93,7 +95,7 @@ export const getRealTimeNumberOfMessages = (uid) => {
             
             querySnapshot.forEach(doc=>{
                
-               if( doc.data().user_uid_2==uid ){
+               if( doc.data().user_uid_2===uid ){
                              
                                newMessages[doc.data().user_uid_1] = newMessages[doc.data().user_uid_1]?newMessages[doc.data().user_uid_1]+1:1
                }                 
@@ -123,7 +125,7 @@ export const UpdateRealTimeView = (u) => {
            
             querySnapshot.forEach(doc=>{
               
-                   if( doc.data().user_uid_1 == u.uid_2 && doc.data().user_uid_2 == u.uid_1){
+                   if( doc.data().user_uid_1 === u.uid_2 && doc.data().user_uid_2 === u.uid_1){
                     db.collection('conversation')
                     .doc(doc.id)
                     .update({

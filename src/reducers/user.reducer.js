@@ -29,7 +29,9 @@ export default (state = initstate,action) => {
             newmessages: action.payload.newMessages
         }
         break
+   
     }
+    
     return state
 }
 

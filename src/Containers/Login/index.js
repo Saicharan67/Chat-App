@@ -1,11 +1,11 @@
-import { auth } from 'firebase'
-import React, { useEffect, useState } from 'react'
+
+import React, {  useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { isLoggedInUser, signin } from '../../actions'
-import Header from '../../Components/Header'
+import {  signin } from '../../actions'
+
 import Layout from '../../Components/layout'
-import Card from '../../Components/UI'
+
 import './style.css'
 /**
 * @author
@@ -26,11 +26,11 @@ const LoginPage = (props) => {
     const userLogin = (e) => {
         setButtonClicked(true)
         e.preventDefault()
-        if ( email== "" ){
+        if ( email=== "" ){
            alert("Email Is Required")
            return
         }
-        if(password==""){
+        if(password===""){
             alert("Password Is Required")
             return
         }

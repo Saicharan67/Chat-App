@@ -1,6 +1,6 @@
 // import React from 'react'
  import Layout from '../../Components/layout'
-
+ import {firestore} from 'firebase'
 // /**
 // * @author
 // * @function HomePage
@@ -41,8 +41,8 @@ return(
                         <span className={user.isOnline ? 'onlineStatus':'onlineStatus off' }>
                             {
                                 user.isOnline? 
-                                <i style={{color:'green'}} class="fa fa-dot-circle-o" aria-hidden="true"></i>:
-                                <i style={{color:'red'}} class="fa fa-dot-circle-o" aria-hidden="true"></i>
+                                <i style={{color:'green'}} className="fa fa-dot-circle-o" aria-hidden="true"></i>:
+                                <i style={{color:'red'}} className="fa fa-dot-circle-o" aria-hidden="true"></i>
                             }
                         </span>
                     </div>
@@ -82,27 +82,49 @@ const HomePage = (props) => {
         dispatch(getRealTimeNumberOfMessages(auth.uid))
  },[])
     const initChat = (talkingwith ,e) => {
+            const boo = talkingwith.uid
             setUserUid(talkingwith.uid)
-            setChatUser( `${talkingwith.FirstName} ${talkingwith.LastName}`)
-          
-             const nusers=document.getElementsByClassName('displayName')
-            
+            setChatUser( `${talkingwith.FirstName} ${talkingwith.LastName}`)         
+             const nusers=document.getElementsByClassName('displayName')      
              for(let i = 0; i<nusers.length; i++ ){
                 nusers[i].className='displayName'
                
              }
-             e.target.className='displayName active'
-               
+             e.target.className='displayName active'     
              dispatch(getRealTimeConversations({uid_1: auth.uid, uid_2: talkingwith.uid  }))
-             dispatch(getRealTimeNumberOfMessages(auth.uid))
-            
-             
-            
-            
+             dispatch(getRealTimeNumberOfMessages(auth.uid))            
              setChatStarted(true)
-             console.log(auth.uid,talkingwith.uid)
+           //  dispatch(UpdateRealTimeView({uid_1: auth.uid, uid_2: talkingwith.uid  }))
+
+            const db = firestore()
+            console.log(talkingwith.uid,auth.uid)
+         
+            db.collection('conversation')
+            .where('isView','==', false)
+            .where('user_uid_2','==',auth.uid)
+            .onSnapshot((querySnapshot)=>{
             
-             dispatch(UpdateRealTimeView({uid_1: auth.uid, uid_2: talkingwith.uid  }))
+                querySnapshot.forEach(doc=>{
+                
+                    if(  boo === doc.data().user_uid_1 && doc.data().user_uid_2 === auth.uid){
+
+                        db.collection('conversation')
+                        .doc(doc.id)
+                        .update({
+                            isView: true
+                        })
+                        console.log(doc.data().user_uid_1,doc.data().user_uid_2)
+                        console.log(talkingwith.uid,boo,auth.uid)
+                        
+                    }
+                    
+
+                    
+                    
+                })
+                
+            })    
+        
         
          
     } 
@@ -159,12 +181,12 @@ const HomePage = (props) => {
                 ChatStarted?
                 
                 user.conversations.map((con,id)=>
-                    <div key={id} className={con.user_uid_1==auth.uid? 'sent': 'received'}   style={{ textAlign: con.user_uid_1==auth.uid? 'right': 'left' , marginTop: id==0? '15px': '2px'}}>
+                    <div key={id} className={con.user_uid_1===auth.uid? 'sent': 'received'}   style={{ textAlign: con.user_uid_1===auth.uid? 'right': 'left' , marginTop: id===0? '15px': '2px'}}>
                         
             {/* <p className={con.user_uid_1==auth.uid ?'messagestyleright':'messagestyleleft'}>{con.message}</p> */}
                       
-                      <p className={ con.user_uid_1==auth.uid ? id==0 || user.conversations[id-1].user_uid_1!=auth.uid?'messagestyleright': 'normalrightmessage': id==0 || user.conversations[id-1].user_uid_1==auth.uid?'messagestyleleft':'normalleftmessage'} >
-                          {con.message} <span>{con.user_uid_1==auth.uid?con.isView?'seen':'notseen':''}</span></p>
+                      <p className={ con.user_uid_1===auth.uid ? id===0 || user.conversations[id-1].user_uid_1!==auth.uid?'messagestyleright': 'normalrightmessage': id===0 || user.conversations[id-1].user_uid_1===auth.uid?'messagestyleleft':'normalleftmessage'} >
+                          {con.message} <span>{con.user_uid_1===auth.uid?con.isView?<i style={{color:'blue'}} className="fa fa-check" aria-hidden="true"></i>:<i className="fa fa-check" aria-hidden="true"></i>:''}</span></p>
                      
                    </div>
                 )
@@ -182,7 +204,7 @@ const HomePage = (props) => {
                <input         
                className='textarea' value={message} placeholder='Enter Message..' onChange={(e)=> setmessage(e.target.value)}    
                onKeyDown={(event)=>{
-                   if(event.key=='Enter'){
+                   if(event.key==='Enter'){
                         return submitMsg()                
                    }
                }}></input>
