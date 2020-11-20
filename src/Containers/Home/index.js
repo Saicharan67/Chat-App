@@ -212,7 +212,7 @@ const HomePage = (props) => {
 
                
                 <button className='SendButton' onClick={submitMsg}><i className='fa fa-send-o'></i></button>
-            </div>: null
+            </div>: ""
         }
     </div>
 </div>
