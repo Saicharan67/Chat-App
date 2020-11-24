@@ -14,21 +14,21 @@
   overflow: hidden;
 }
 .listOfUsers {
-  width: 23%;
+  width: 30%;
   height: 100%;
   overflow-x: hidden;
   /* border-right: 1px solid #ccc; */
   background-color: rgb(255, 255, 255);
 }
 .chatArea {
-  width: 77%;
+  width: 70%;
   height: 100%;
   overflow-x: hidden;
   position: relative;
 }
 .chatHeader {
   position: fixed;
-  width: 77%;
+  width: 70%;
   height: 40px;
   background-color: rgb(20, 108, 241);
   text-align: center;
@@ -37,17 +37,18 @@
   font-family: "Poppins", sans-serif;
 }
 .chatControls {
-  background-color: #ffffff;
+  background-color: #e9e5e5;
   display: flex;
+
   position: fixed;
-  width: 77%;
+  width: 70%;
   height: 60px;
   bottom: 0;
 }
 .chatControls .textarea {
   width: 90%;
   height: 40px;
-  outline: none;
+  outline: #fff;
   font-size: 1rem;
   padding: 10px;
 
@@ -59,13 +60,19 @@
   color: rgb(17, 17, 17);
 }
 .SendButton {
-  width: 8%;
-  margin: auto;
+  width: 5%;
+  margin: auto 1rem;
   padding: 5px;
   height: 40px;
   color: #fff;
   background-color: #1b5ff9;
   border-radius: 20px;
+}
+
+.chatControls .fi {
+  margin: 0.8rem;
+  height: 40px;
+  width: 3%;
 }
 .displayName {
   display: flex;
@@ -273,6 +280,11 @@
     height: 50px;
     bottom: 0;
   }
+  .chatControls .fi {
+    margin: 0.6rem;
+    height: 40px;
+    width: 3%;
+  }
   .chatControls .textarea {
     font-size: 1.1rem;
     padding: 10px;
@@ -280,8 +292,9 @@
 
     overflow-y: hidden;
   }
-  .chatControls button {
+  .chatControls .SendButton {
     width: 15%;
+    margin: auto 1rem;
   }
   .messageSections {
     height: calc(100% - 90px);

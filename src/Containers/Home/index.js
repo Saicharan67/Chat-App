@@ -200,7 +200,12 @@ const HomePage = (props) => {
         {
             ChatStarted?
             <div className="chatControls">
+               
+                <i class=' fi fa fa-smile-o fa-2x'></i>
+                
+                
                 <div style={{width: '90%'  ,position:"relative",display:'flex',justifyContent:'center',alignItems:'center'}}>
+               
                <input         
                className='textarea' value={message} placeholder='Enter Message..' onChange={(e)=> setmessage(e.target.value)}    
                onKeyDown={(event)=>{
