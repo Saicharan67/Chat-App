@@ -18,6 +18,8 @@
 //  }
 
 // export default HomePage
+import 'emoji-mart/css/emoji-mart.css'
+import { Picker } from 'emoji-mart'
 import React, { useEffect, useState } from 'react';
 import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -128,6 +130,11 @@ const HomePage = (props) => {
         
          
     } 
+    const addEmoji = e => {
+        let emoji = e.native;
+        setmessage(message+emoji)
+        console.log(emoji)
+    };
     const submitMsg = () => {
         
         var chatHistory = document.getElementsByClassName("messageSections")[0];
@@ -185,9 +192,10 @@ const HomePage = (props) => {
                         
             {/* <p className={con.user_uid_1==auth.uid ?'messagestyleright':'messagestyleleft'}>{con.message}</p> */}
                       
-                      <p className={ con.user_uid_1===auth.uid ? id===0 || user.conversations[id-1].user_uid_1!==auth.uid?'messagestyleright': 'normalrightmessage': id===0 || user.conversations[id-1].user_uid_1===auth.uid?'messagestyleleft':'normalleftmessage'} >
+                      <p className={ con.user_uid_1===auth.uid ? id==0 || user.conversations[id-1].user_uid_1!==auth.uid?'messagestyleright': 'normalrightmessage': id==0 || user.conversations[id-1].user_uid_1===auth.uid?'messagestyleleft':'normalleftmessage'} >
                           {con.message} <span>{con.user_uid_1===auth.uid?con.isView?<i style={{color:'blue'}} className="fa fa-check" aria-hidden="true"></i>:<i className="fa fa-check" aria-hidden="true"></i>:''}</span></p>
                      
+                         
                    </div>
                 )
                 
@@ -200,8 +208,12 @@ const HomePage = (props) => {
         {
             ChatStarted?
             <div className="chatControls">
-               
-                <i class=' fi fa fa-smile-o fa-2x'></i>
+                
+                <i class=' fi fa fa-smile-o fa-2x'>
+                  <span>
+                  <Picker onSelect={addEmoji} />
+                  </span>
+                </i>
                 
                 
                 <div style={{width: '90%'  ,position:"relative",display:'flex',justifyContent:'center',alignItems:'center'}}>

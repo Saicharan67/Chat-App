@@ -147,6 +147,7 @@
   position: relative;
 }
 .messagestyleright:before {
+  content: "";
   width: 0px;
   height: 0px;
   position: absolute;
@@ -312,5 +313,78 @@
   }
   .received {
     margin-left: 1rem;
+  }
+  .messagestyleright {
+    background: skyblue;
+    display: inline-block;
+    padding: 1px 10px;
+    border-radius: 10px;
+    max-width: 40%;
+    margin: 1px;
+    margin-top: 2px;
+    display: inline-block;
+    font-size: 1rem;
+    text-align: center;
+    position: relative;
+  }
+  .messagestyleright:before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-left: 10px solid skyblue;
+    border-right: 10px solid transparent;
+    border-top: 10px solid skyblue;
+    border-bottom: 0px solid transparent;
+    right: -8px;
+    top: 0px;
+  }
+  .normalrightmessage {
+    background: skyblue;
+    display: inline-block;
+    padding: 1px 10px;
+    border-radius: 10px;
+    margin: 1px;
+    max-width: 40%;
+    display: inline-block;
+    font-size: 1rem;
+    text-align: center;
+    position: relative;
+  }
+  .normalleftmessage {
+    background: skyblue;
+    display: inline-block;
+    padding: 1px 10px;
+    border-radius: 10px;
+    margin: 1px;
+    max-width: 40%;
+    display: inline-block;
+    font-size: 1rem;
+    text-align: center;
+    position: relative;
+  }
+  .messagestyleleft {
+    background: skyblue;
+    display: inline-block;
+    padding: 1px 10px;
+    border-radius: 10px;
+    max-width: 40%;
+    margin: 1px;
+    display: inline-block;
+    font-size: 1rem;
+    text-align: center;
+    position: relative;
+  }
+  .messagestyleleft:before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-left: 10px solid transparent;
+    border-right: 10px solid skyblue;
+    border-top: 10px solid skyblue;
+    border-bottom: 0px solid transparent;
+    left: -8px;
+    top: 0px;
   }
 }
