@@ -190,11 +190,21 @@ const HomePage = (props) => {
                 user.conversations.map((con,id)=>
                     <div key={id} className={con.user_uid_1===auth.uid? 'sent': 'received'}   style={{ textAlign: con.user_uid_1===auth.uid? 'right': 'left' , marginTop: id===0? '15px': '2px'}}>
                         
-            {/* <p className={con.user_uid_1==auth.uid ?'messagestyleright':'messagestyleleft'}>{con.message}</p> */}
+                         {/* <p className={con.user_uid_1==auth.uid ?'messagestyleright':'messagestyleleft'}>{con.message}</p> */}
                       
                       <p className={ con.user_uid_1===auth.uid ? id==0 || user.conversations[id-1].user_uid_1!==auth.uid?'messagestyleright': 'normalrightmessage': id==0 || user.conversations[id-1].user_uid_1===auth.uid?'messagestyleleft':'normalleftmessage'} >
-                          {con.message} <span>{con.user_uid_1===auth.uid?con.isView?<i style={{color:'blue'}} className="fa fa-check" aria-hidden="true"></i>:<i className="fa fa-check" aria-hidden="true"></i>:''}</span></p>
-                     
+                          {con.message} 
+                      </p>
+                     {con.user_uid_1===auth.uid?con.isView?
+                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2-all" fill="blue" xmlns="http://www.w3.org/2000/svg">
+                                   <path fill-rule="evenodd" d="M12.354 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                   <path d="M6.25 8.043l-.896-.897a.5.5 0 1 0-.708.708l.897.896.707-.707zm1 2.414l.896.897a.5.5 0 0 0 .708 0l7-7a.5.5 0 0 0-.708-.708L8.5 10.293l-.543-.543-.707.707z"/>
+                     </svg>
+                     :
+                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2-all" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                   <path fill-rule="evenodd" d="M12.354 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                   <path d="M6.25 8.043l-.896-.897a.5.5 0 1 0-.708.708l.897.896.707-.707zm1 2.414l.896.897a.5.5 0 0 0 .708 0l7-7a.5.5 0 0 0-.708-.708L8.5 10.293l-.543-.543-.707.707z"/>
+                    </svg>:''}
                          
                    </div>
                 )
