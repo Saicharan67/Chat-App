@@ -1,6 +1,8 @@
 // import React from 'react'
  import Layout from '../../Components/layout'
  import {firestore} from 'firebase'
+ import Modal from 'react-awesome-modal';
+
 // /**
 // * @author
 // * @function HomePage
@@ -60,8 +62,16 @@ const HomePage = (props) => {
    const [ChatUser,setChatUser] =useState('')
    const [message,setmessage] =useState('')
    const [UserUid,setUserUid] =useState('')
+   const [view , setvisible]=useState(false)
    const newMessages = user.newmessages
-  
+   const openModal = () => {
+       console.log('opened')
+       setvisible(true)
+   }
+   const closeModal = () => {
+    console.log('closed')
+       setvisible(false)
+   }
     useEffect(()=>{
        unsubscribe =  dispatch(getRealTimeUsers(auth.uid))
           .then((unsubscribe)=>{
@@ -215,32 +225,40 @@ const HomePage = (props) => {
            
             }
         </div>
-        {
+        {   
+            
             ChatStarted?
-            <div className="chatControls">
-                
-                <i class=' fi fa fa-smile-o fa-2x'>
-                  <span>
-                  <Picker onSelect={addEmoji} />
-                  </span>
-                </i>
-                
+            <div className="chatControls" >
+                <div    > 
+                    <i className='fi fa fa-smile-o fa-2x' onClick={()=>openModal()}>
+                           
+                             
+                    </i>
+                   
+                </div>
                 
                 <div style={{width: '90%'  ,position:"relative",display:'flex',justifyContent:'center',alignItems:'center'}}>
                
-               <input         
-               className='textarea' value={message} placeholder='Enter Message..' onChange={(e)=> setmessage(e.target.value)}    
-               onKeyDown={(event)=>{
-                   if(event.key==='Enter'){
-                        return submitMsg()                
-                   }
-               }}></input>
+                        <input         
+                        className='textarea' value={message} placeholder='Enter Message..' onChange={(e)=> setmessage(e.target.value)}    
+                        onKeyDown={(event)=>{
+                            if(event.key==='Enter'){
+                                    return submitMsg()                
+                            }
+                        }}></input>
                </div>
 
                
                 <button className='SendButton' onClick={submitMsg}><i className='fa fa-send-o'></i></button>
             </div>: ""
         }
+           <Modal
+            effect="fadeInUp"
+            onClickAway={() => closeModal()}
+            visible={view}
+            >
+              <Picker onSelect={addEmoji}   />
+            </Modal>
     </div>
 </div>
 
