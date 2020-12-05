@@ -26,7 +26,7 @@ export default (state = initstate,action) => {
        
         state={
             ...state,
-            newmessages: action.payload.newMessages
+            newmessages: action.payload.messages
         }
         break
    

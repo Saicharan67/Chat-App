@@ -28,27 +28,7 @@ return async dispatch => {
 
 
 
-export const updateMessage = (msgObj) => {
-    return async dispatch => {
-        const db =firestore();
-        db.collection('conversation')
-        .add({
-            ...msgObj,
-            isView: false,
-            createdAt: new Date()
-        })
-        .then((data)=>{
-            // dispatch({
-            //     type: UserConstants. GET_REALTIME_MESSAGES,
-                
-            // })
-            console.log(data,'msg updated')
-        })
-        .catch(err=>{
-            console.log(err)
-        })
-    }
-}
+
 
 export const getRealTimeConversations =(user)=> {
     return async dispatch => {
@@ -88,26 +68,31 @@ export const getRealTimeNumberOfMessages = (uid) => {
    
     return async dispatch => {
         const db =firestore()
-        const newMessages={}
-        db.collection('conversation')
-        .where('isView','==', false)
-        .onSnapshot((querySnapshot)=>{
+       
+        
             
+            db.collection('conversation')
+           .where('isView','==', false)
+           .onSnapshot((querySnapshot)=>{
+            const newMessages={}
             querySnapshot.forEach(doc=>{
                
                if( doc.data().user_uid_2===uid ){
                              
                                newMessages[doc.data().user_uid_1] = newMessages[doc.data().user_uid_1]?newMessages[doc.data().user_uid_1]+1:1
+                            
                }                 
             })
-            
+            console.log(newMessages)
+            const messages = newMessages
             dispatch({
                 type: UserConstants.GET_REALTIME_NEW_MESSAGES,
-                payload: {newMessages}
+                payload: {messages}
             })
           
          
         })    
+        
         
        
        
@@ -116,9 +101,8 @@ export const getRealTimeNumberOfMessages = (uid) => {
 }
 }
 export const UpdateRealTimeView = (u) => {
-    return () => {
+    return async () => {
         const db = firestore()
-        console.log('caming',u.uid_2,u.uid_1)
         db.collection('conversation')
         .where('isView','==', false)
         .onSnapshot((querySnapshot)=>{
@@ -131,10 +115,10 @@ export const UpdateRealTimeView = (u) => {
                     .update({
                         isView: true
                     })
-                    console.log('view updated',doc.data().user_uid_1,doc.data().user_uid_2)
-                    console.log(u.uid_2,u.uid_1)
+                   
+                   
                 }
-                
+                console.log('view updated',doc.data().user_uid_1,doc.data().user_uid_2)
 
                 
                   
@@ -145,4 +129,22 @@ export const UpdateRealTimeView = (u) => {
         
        
 }
+}
+export const updateMessage = (msgObj) => {
+    return async dispatch => {
+        const db =firestore();
+        db.collection('conversation')
+        .add({
+            ...msgObj,
+            isView: false,
+            createdAt: new Date()
+        })
+        .then((data)=>{
+           
+            console.log(data,'msg updated')
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    }
 }
