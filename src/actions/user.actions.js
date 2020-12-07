@@ -83,7 +83,7 @@ export const getRealTimeNumberOfMessages = (uid) => {
                             
                }                 
             })
-            console.log(newMessages)
+            //console.log(newMessages)
             const messages = newMessages
             dispatch({
                 type: UserConstants.GET_REALTIME_NEW_MESSAGES,
@@ -105,20 +105,28 @@ export const UpdateRealTimeView = (u) => {
         const db = firestore()
         db.collection('conversation')
         .where('isView','==', false)
+        .where('user_uid_2','==',u.uid_1)
+        .where('user_uid_1','==',u.uid_2)
         .onSnapshot((querySnapshot)=>{
-           
+         
             querySnapshot.forEach(doc=>{
               
-                   if( doc.data().user_uid_1 === u.uid_2 && doc.data().user_uid_2 === u.uid_1){
+                  
                     db.collection('conversation')
                     .doc(doc.id)
                     .update({
                         isView: true
                     })
+                    .then(()=>{
+                        console.log('isViewed')
+                    })
+                    .catch(()=>{
+                        console.log('NotViewed')
+                    })
                    
                    
-                }
-                console.log('view updated',doc.data().user_uid_1,doc.data().user_uid_2)
+                
+                //console.log('view updated',doc.data().user_uid_1,doc.data().user_uid_2)
 
                 
                   
