@@ -134,7 +134,7 @@
 }
 
 .messagestyleright {
-  background: skyblue;
+  background: rgb(148, 220, 248);
   display: inline-block;
   padding: 1px 10px;
   border-radius: 10px;
@@ -151,15 +151,15 @@
   width: 0px;
   height: 0px;
   position: absolute;
-  border-left: 10px solid skyblue;
+  border-left: 10px solid rgb(148, 220, 248);
   border-right: 10px solid transparent;
-  border-top: 10px solid skyblue;
+  border-top: 10px solid rgb(148, 220, 248);
   border-bottom: 0px solid transparent;
   right: -8px;
   top: 0px;
 }
 .normalrightmessage {
-  background: skyblue;
+  background: rgb(148, 220, 248);
   display: inline-block;
   padding: 1px 10px;
   border-radius: 10px;
@@ -171,7 +171,7 @@
   position: relative;
 }
 .normalleftmessage {
-  background: skyblue;
+  background: rgb(221, 221, 221);
   display: inline-block;
   padding: 1px 10px;
   border-radius: 10px;
@@ -183,7 +183,7 @@
   position: relative;
 }
 .messagestyleleft {
-  background: skyblue;
+  background: rgb(221, 221, 221);
   display: inline-block;
   padding: 1px 10px;
   border-radius: 10px;
@@ -200,8 +200,8 @@
   height: 0px;
   position: absolute;
   border-left: 10px solid transparent;
-  border-right: 10px solid skyblue;
-  border-top: 10px solid skyblue;
+  border-right: 10px solid rgb(221, 221, 221);
+  border-top: 10px solid rgb(221, 221, 221);
   border-bottom: 0px solid transparent;
   left: -8px;
   top: 0px;
