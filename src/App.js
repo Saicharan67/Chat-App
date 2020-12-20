@@ -23,7 +23,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <PrivateRoute path='/' exact component={HomePage}/>
+        <PrivateRoute path='/Chat-App' exact component={HomePage}/>
         <Route path='/login' component={LoginPage}/>
         <Route path='/signup' component={SignUpPage}/>
       </Router>
