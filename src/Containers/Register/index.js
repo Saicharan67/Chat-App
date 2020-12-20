@@ -30,7 +30,7 @@ const registerUser = (e) => {
     dispatch(signup(user))
 }
 if(auth.authenticated){
-    return <Redirect to={'/'}/>
+    return <Redirect to={'/Chat-App'}/>
 }
 
   return(
