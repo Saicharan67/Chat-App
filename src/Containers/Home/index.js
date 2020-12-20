@@ -26,6 +26,8 @@ import React, { useEffect, useState } from 'react';
 import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRealTimeConversations, getRealTimeUsers, updateMessage ,UpdateRealTimeView,getRealTimeNumberOfMessages} from '../../actions/user.actions';
+
+
 const User = props => {
    const {user ,onClick,newmessages} = props;
 return(
@@ -57,14 +59,14 @@ const HomePage = (props) => {
   const dispatch = useDispatch() 
   let unsubscribe;
   const auth = useSelector(state => state.auth)
-  const user = useSelector(state => state.user)
+ 
   const [ChatStarted,setChatStarted] =useState(false)
   const [ChatUser,setChatUser] =useState('')
   const [message,setmessage] =useState('')
   const [UserUid,setUserUid] =useState('')
   const [view , setvisible]=useState(false)
- 
-  const newMessages = user.newmessages
+  const user = useSelector(state => state.user)
+  
   const openModal = () => {
       console.log('opened')
       setvisible(true)
@@ -98,6 +100,8 @@ const HomePage = (props) => {
         dispatch(getRealTimeNumberOfMessages(auth.uid))
        
    },[])
+   const newMessages = user.newmessages
+  
    const initChat = (talkingwith ,e) => {
            setChatStarted(true)
            setUserUid(talkingwith.uid)
