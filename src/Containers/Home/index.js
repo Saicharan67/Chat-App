@@ -29,14 +29,21 @@ import { getRealTimeConversations, getRealTimeUsers, updateMessage ,UpdateRealTi
 
 
 const User = props => {
-   const {user ,onClick,newmessages} = props;
+   const {user ,onClick, newmessages} = props;
+   console.log(newmessages)
+
+  
 return(
               <div onClick={(e)=>onClick(user,e)} key={user.uid} className="displayName">
                   <div className='item'>
                       {
-                        newmessages[user.uid] ? 
-                       <span className="notify-badge">{newmessages[user.uid]}</span>
-                       :''
+                        
+                       
+                      newmessages?newmessages[user.uid]?<span className="notify-badge">{newmessages[user.uid]}</span> :'':''
+                       
+                      
+                      
+                        
                       }
                        <img className='Dp' src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTr3k-GgfticbNEipXYeXapEpiiawOSHjXfsQ&usqp=CAU" alt="Dp" />
                    </div>
@@ -56,16 +63,19 @@ return(
 )
 }
 const HomePage = (props) => {
+  const user = useSelector(state => state.user)
+  
   const dispatch = useDispatch() 
   let unsubscribe;
   const auth = useSelector(state => state.auth)
- 
+  const newMessages = useSelector(state => state.user.newmessages)
+  console.log(newMessages)
   const [ChatStarted,setChatStarted] =useState(false)
   const [ChatUser,setChatUser] =useState('')
   const [message,setmessage] =useState('')
   const [UserUid,setUserUid] =useState('')
   const [view , setvisible]=useState(false)
-  const user = useSelector(state => state.user)
+  
   
   const openModal = () => {
       console.log('opened')
@@ -100,7 +110,7 @@ const HomePage = (props) => {
         dispatch(getRealTimeNumberOfMessages(auth.uid))
        
    },[])
-   const newMessages = user.newmessages
+   
   
    const initChat = (talkingwith ,e) => {
            setChatStarted(true)
