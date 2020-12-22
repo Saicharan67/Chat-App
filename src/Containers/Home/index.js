@@ -30,7 +30,7 @@ import { getRealTimeConversations, getRealTimeUsers, updateMessage ,UpdateRealTi
 
 const User = props => {
    const {user ,onClick, newmessages} = props;
-   console.log(newmessages)
+   
 
   
 return(
@@ -69,7 +69,7 @@ const HomePage = (props) => {
   let unsubscribe;
   const auth = useSelector(state => state.auth)
   const newMessages = useSelector(state => state.user.newmessages)
-  console.log(newMessages)
+  
   const [ChatStarted,setChatStarted] =useState(false)
   const [ChatUser,setChatUser] =useState('')
   const [message,setmessage] =useState('')
@@ -124,8 +124,11 @@ const HomePage = (props) => {
             e.target.className='displayName active'     
             dispatch(getRealTimeConversations({uid_1: auth.uid, uid_2: talkingwith.uid  }))
             dispatch(getRealTimeNumberOfMessages(auth.uid))            
-           
-            dispatch(UpdateRealTimeView({uid_1: auth.uid, uid_2: talkingwith.uid  }))
+               
+                 dispatch(UpdateRealTimeView({uid_1: auth.uid, uid_2: talkingwith.uid  }))
+               
+            
+            console.log( auth.uid,talkingwith.uid)
 
            
        

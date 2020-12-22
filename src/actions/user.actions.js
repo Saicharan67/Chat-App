@@ -33,7 +33,7 @@ return async dispatch => {
 export const getRealTimeConversations =(user)=> {
     return async dispatch => {
         const db =firestore()
-        db.collection('conversation')
+      const unsubscribe =   db.collection('conversation')
        // .where('user_uid_1','in',[user.uid_1,user.uid_2])
         .orderBy('createdAt','asc')
         .onSnapshot((querySnapshot)=>{
@@ -60,13 +60,17 @@ export const getRealTimeConversations =(user)=> {
             console.log(conversations)
         })    
         
+        setTimeout(function() {
+            unsubscribe();
+            
+        }, 2500);
     }
-
+ 
     
 }
 export const getRealTimeNumberOfMessages = (uid) => {
    
-    return async dispatch => {
+    return  dispatch => {
         const db =firestore()
        
         
@@ -102,8 +106,10 @@ export const getRealTimeNumberOfMessages = (uid) => {
 }
 export const UpdateRealTimeView = (u) => {
     return async () => {
+        
         const db = firestore()
-        db.collection('conversation')
+        console.log(u.uid_1,u.uid_2)
+       const unsubscribe =  db.collection('conversation')
         .where('isView','==', false)
         .where('user_uid_2','==',u.uid_1)
         .where('user_uid_1','==',u.uid_2)
@@ -111,7 +117,8 @@ export const UpdateRealTimeView = (u) => {
          
             querySnapshot.forEach(doc=>{
               
-                  
+                  if(doc.data().user_uid_1==u.uid_2 && doc.data().user_uid_2==u.uid_1){
+                      
                     db.collection('conversation')
                     .doc(doc.id)
                     .update({
@@ -119,14 +126,19 @@ export const UpdateRealTimeView = (u) => {
                     })
                     .then(()=>{
                         console.log('isViewed')
+                       
                     })
                     .catch(()=>{
                         console.log('NotViewed')
                     })
                    
+                  }
+                  else{
+                      console.log('Not updated')
+                  }
                    
+                    console.log('view updated',doc.data().user_uid_1,doc.data().user_uid_2)
                 
-                //console.log('view updated',doc.data().user_uid_1,doc.data().user_uid_2)
 
                 
                   
@@ -134,9 +146,14 @@ export const UpdateRealTimeView = (u) => {
             
         })    
         
-        
+        setTimeout(function() {
+            unsubscribe();
+            
+        }, 2500);
+       
        
 }
+ 
 }
 export const updateMessage = (msgObj) => {
     return async dispatch => {
