@@ -25,7 +25,7 @@ import { Picker } from 'emoji-mart'
 import React, { useEffect, useState } from 'react';
 import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { getRealTimeConversations, getRealTimeUsers, updateMessage ,UpdateRealTimeView,getRealTimeNumberOfMessages} from '../../actions/user.actions';
+import { getRealTimeConversations, getRealTimeUsers, updateMessage ,updateRealTimeView,getRealTimeNumberOfMessages} from '../../actions/user.actions';
 
 
 const User = props => {
@@ -125,7 +125,7 @@ const HomePage = (props) => {
             dispatch(getRealTimeConversations({uid_1: auth.uid, uid_2: talkingwith.uid  }))
             dispatch(getRealTimeNumberOfMessages(auth.uid))            
                
-                 dispatch(UpdateRealTimeView({uid_1: auth.uid, uid_2: talkingwith.uid  }))
+                 dispatch(updateRealTimeView({uid_1: auth.uid, uid_2: talkingwith.uid  }))
                
             
             console.log( auth.uid,talkingwith.uid)

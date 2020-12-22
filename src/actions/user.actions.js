@@ -33,7 +33,7 @@ return async dispatch => {
 export const getRealTimeConversations =(user)=> {
     return async dispatch => {
         const db =firestore()
-      const unsubscribe =   db.collection('conversation')
+      db.collection('conversation')
        // .where('user_uid_1','in',[user.uid_1,user.uid_2])
         .orderBy('createdAt','asc')
         .onSnapshot((querySnapshot)=>{
@@ -59,11 +59,7 @@ export const getRealTimeConversations =(user)=> {
             })
             console.log(conversations)
         })    
-        
-        setTimeout(function() {
-            unsubscribe();
-            
-        }, 2500);
+       
     }
  
     
@@ -104,12 +100,12 @@ export const getRealTimeNumberOfMessages = (uid) => {
        
 }
 }
-export const UpdateRealTimeView = (u) => {
+export const updateRealTimeView = (u) => {
     return async () => {
         
         const db = firestore()
         console.log(u.uid_1,u.uid_2)
-       const unsubscribe =  db.collection('conversation')
+       db.collection('conversation')
         .where('isView','==', false)
         .where('user_uid_2','==',u.uid_1)
         .where('user_uid_1','==',u.uid_2)
@@ -127,17 +123,14 @@ export const UpdateRealTimeView = (u) => {
                     .then(()=>{
                         console.log('isViewed')
                        
+                       
                     })
                     .catch(()=>{
                         console.log('NotViewed')
                     })
                    
                   }
-                  else{
-                      console.log('Not updated')
-                  }
-                   
-                    console.log('view updated',doc.data().user_uid_1,doc.data().user_uid_2)
+                  
                 
 
                 
@@ -146,10 +139,7 @@ export const UpdateRealTimeView = (u) => {
             
         })    
         
-        setTimeout(function() {
-            unsubscribe();
-            
-        }, 2500);
+      
        
        
 }
@@ -158,7 +148,7 @@ export const UpdateRealTimeView = (u) => {
 export const updateMessage = (msgObj) => {
     return async dispatch => {
         const db =firestore();
-        db.collection('conversation')
+       const unsubscribe =  db.collection('conversation')
         .add({
             ...msgObj,
             isView: false,
@@ -167,9 +157,12 @@ export const updateMessage = (msgObj) => {
         .then((data)=>{
            
             console.log(data,'msg updated')
+            
         })
         .catch(err=>{
             console.log(err)
         })
+
+       
     }
 }
