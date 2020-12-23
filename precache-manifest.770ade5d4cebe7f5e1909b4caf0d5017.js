@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3eaa6a0b9a99e0668cb1f166691b49f4",
+    "revision": "18e013bf2cd84fd1a2fe1867e37b3a3c",
     "url": "/Chat-App/index.html"
   },
   {
-    "revision": "68b1764b2eb61176b038",
+    "revision": "6e8f86033c642e2c9e23",
     "url": "/Chat-App/static/css/2.0c4bd45e.chunk.css"
   },
   {
-    "revision": "4dd6f0777b573b2bdcc2",
-    "url": "/Chat-App/static/css/main.7ee147a3.chunk.css"
+    "revision": "c919f912922c88ecccbb",
+    "url": "/Chat-App/static/css/main.8afb2f1d.chunk.css"
   },
   {
-    "revision": "68b1764b2eb61176b038",
-    "url": "/Chat-App/static/js/2.529a8c17.chunk.js"
+    "revision": "6e8f86033c642e2c9e23",
+    "url": "/Chat-App/static/js/2.d2e33a20.chunk.js"
   },
   {
     "revision": "b01cf20ee08477db845d02c3b279da13",
-    "url": "/Chat-App/static/js/2.529a8c17.chunk.js.LICENSE.txt"
+    "url": "/Chat-App/static/js/2.d2e33a20.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "4dd6f0777b573b2bdcc2",
-    "url": "/Chat-App/static/js/main.7f26bb25.chunk.js"
+    "revision": "c919f912922c88ecccbb",
+    "url": "/Chat-App/static/js/main.09ce583c.chunk.js"
   },
   {
     "revision": "40429377859f991c1c78",
