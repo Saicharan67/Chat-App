@@ -17,7 +17,11 @@ const SignUpPage = (props) => {
     const dispatch = useDispatch();
     const [ButtonClicked,setButtonClicked]=useState(false)
     const auth = useSelector(state => state.auth)
+    const [LoginButtonClicked,setLoginclicked] = useState(false)
+    const LoginClick = ()=>{
+        setLoginclicked(true)
 
+    }
 
 const registerUser = (e) => {
     setButtonClicked(true)
@@ -31,6 +35,9 @@ const registerUser = (e) => {
 }
 if(auth.authenticated){
     return <Redirect to={'/Chat-App'}/>
+}
+if(LoginButtonClicked){
+    return <Redirect to={'/login'}/>
 }
 
   return(
@@ -99,7 +106,11 @@ if(auth.authenticated){
                   : 'Sign Up'
                  }
             </button>
-			<p className="p">Already a User ?<a href='login'>  Login</a></p>
+			<p className="p">Already a User ?&nbsp;
+            &nbsp;<h4 onClick={LoginClick}  > Login</h4>
+            </p>
+            
+            
 		</footer>
 
         </div>

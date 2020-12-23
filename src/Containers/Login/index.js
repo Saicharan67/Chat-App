@@ -18,11 +18,17 @@ const LoginPage = (props) => {
     const [email , setEmail] = useState('');
     const [password , setPassword] = useState('')
     const [ButtonClicked,setButtonClicked]=useState(false)
+    const [SignupButtonClicked,setsignup]=useState(false)
     // useEffect(()=> {
     //     if(!auth.authenticated){
     //         dispatch(isLoggedInUser)
     //     }
     // },[])
+    const signUpClick=()=>{
+       setsignup(true)
+       
+         //
+    }
     const userLogin = (e) => {
         setButtonClicked(true)
         e.preventDefault()
@@ -40,7 +46,9 @@ const LoginPage = (props) => {
     if(auth.authenticated){
         return <Redirect to={'/Chat-App'}/>
     }
-   
+    if (SignupButtonClicked){
+        return <Redirect to={'/signup'}/>
+      }
             
              
              
@@ -92,7 +100,8 @@ const LoginPage = (props) => {
                  }
             
             </button>
-			<p>Don't have an account? <a href="signup" >Sign Up</a></p>
+			<p>Don't have an account?  &nbsp;
+            &nbsp; <h4  onClick={signUpClick} >Sign Up</h4></p>
 		</footer>
 
         </div>

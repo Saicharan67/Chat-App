@@ -43,7 +43,7 @@ export const signup = (user) => {
                 })
                })
                .catch(err=>{
-                console.log(err)
+                alert(err)
                 dispatch({type:`${authConstants.USER_LOGIN}_FAILURE`,
             payload: {err} })
                })
@@ -85,12 +85,12 @@ export const signin = (user)=> {
                     console.log("Logged In successfully")
             })
             .catch((err)=>{
-                   console.log(err)
+                  alert(err)
             })
               
         })
         .catch((err)=>{
-            console.log(err)
+            alert(err)
             dispatch({
                 type: `${authConstants.USER_LOGIN}_FAILURE`,
                 payload: {err}
