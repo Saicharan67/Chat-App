@@ -1,5 +1,9 @@
 import { UserConstants } from "./constants"
 import {firestore} from 'firebase'
+
+
+
+
 export const getRealTimeUsers = (uid) => {
    
 return async dispatch => {
@@ -31,7 +35,9 @@ return async dispatch => {
 
 
 export const getRealTimeConversations =(user)=> {
+    
     return async dispatch => {
+      
         const db =firestore()
       db.collection('conversation')
        // .where('user_uid_1','in',[user.uid_1,user.uid_2])
@@ -52,11 +58,17 @@ export const getRealTimeConversations =(user)=> {
                   
             })
            
-                console.log(user.uid_1,user.uid_2)
-            dispatch({
-                type: UserConstants.GET_REALTIME_MESSAGES,
-                payload: { conversations }
-            })
+                //console.log(user.uid_1,user.uid_2)
+              
+            
+                const talkingwith = user.uid_2
+                console.log(talkingwith)
+                dispatch({
+                    type: UserConstants.GET_REALTIME_MESSAGES,
+                    payload: { conversations , talkingwith }
+                })
+           
+
             console.log(conversations)
         })    
        
@@ -66,7 +78,7 @@ export const getRealTimeConversations =(user)=> {
 }
 export const getRealTimeNumberOfMessages = (uid) => {
    
-    return  dispatch => {
+    return  async dispatch => {
         const db =firestore()
        
         
@@ -102,10 +114,10 @@ export const getRealTimeNumberOfMessages = (uid) => {
 }
 export const updateRealTimeView = (u) => {
     return async () => {
-        
+       
         const db = firestore()
         console.log(u.uid_1,u.uid_2)
-       db.collection('conversation')
+       const unsubscribe = db.collection('conversation')
         .where('isView','==', false)
         .where('user_uid_2','==',u.uid_1)
         .where('user_uid_1','==',u.uid_2)
@@ -140,7 +152,9 @@ export const updateRealTimeView = (u) => {
         })    
         
       
-       
+       setInterval(() => {
+           unsubscribe()
+       }, 2000);
        
 }
  

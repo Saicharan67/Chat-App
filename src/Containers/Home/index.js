@@ -2,6 +2,7 @@
 import Layout from '../../Components/layout'
 import {firestore} from 'firebase'
 import Modal from 'react-awesome-modal';
+import { UserConstants } from "../../actions/constants"
 
 // /**
 // * @author
@@ -113,6 +114,10 @@ const HomePage = (props) => {
    
   
    const initChat = (talkingwith ,e) => {
+          
+           var chatHistory = document.getElementsByClassName("messageSections")[0];
+         
+           chatHistory.scrollTop = chatHistory.scrollHeight ;
            setChatStarted(true)
            setUserUid(talkingwith.uid)
            setChatUser( `${talkingwith.FirstName} ${talkingwith.LastName}`)         
@@ -122,10 +127,46 @@ const HomePage = (props) => {
               
             }
             e.target.className='displayName active'     
-            dispatch(getRealTimeConversations({uid_1: auth.uid, uid_2: talkingwith.uid  }))
+            //dispatch(getRealTimeConversations({uid_1: auth.uid, uid_2: talkingwith.uid  }))
+            const db =firestore()
+            db.collection('conversation')
+             // .where('user_uid_1','in',[user.uid_1,user.uid_2])
+              .orderBy('createdAt','asc')
+              .onSnapshot((querySnapshot)=>{
+                  const conversations = []
+                  querySnapshot.forEach(doc=>{
+                      if(
+                          (doc.data().user_uid_1 ===auth.uid && doc.data().user_uid_2 === talkingwith.uid)
+                          || 
+                          (doc.data().user_uid_1 === talkingwith.uid && doc.data().user_uid_2 === auth.uid)
+                      ){
+                          conversations.push(doc.data())
+                         
+      
+                      }
+                      
+                        
+                  })
+                 
+                      //console.log(user.uid_1,user.uid_2)
+                    
+                  
+                      const talking = talkingwith.uid
+                     if(user.talkingwith=='' || talkingwith.uid == user.talkingwith){
+                      dispatch({
+                          type: UserConstants.GET_REALTIME_MESSAGES,
+                          payload: { conversations , talking }
+                      })
+                     }
+                 
+      
+                  console.log(conversations)
+              })    
+             
+          
             dispatch(getRealTimeNumberOfMessages(auth.uid))            
-               
-                 dispatch(updateRealTimeView({uid_1: auth.uid, uid_2: talkingwith.uid  }))
+            dispatch(updateRealTimeView({uid_1: auth.uid, uid_2: talkingwith.uid  }))
+                
                
             
             console.log( auth.uid,talkingwith.uid)
@@ -144,8 +185,6 @@ const HomePage = (props) => {
        
        var chatHistory = document.getElementsByClassName("messageSections")[0];
        
-      
-      
        chatHistory.scrollTop = chatHistory.scrollHeight ;
       
         const msgObj ={
@@ -190,7 +229,7 @@ const HomePage = (props) => {
       
        <div className="messageSections">
            {
-               ChatStarted?
+               (ChatStarted && UserUid==user.talkingwith)?
                
                user.conversations.map((con,id)=>
                    <div key={id} className={con.user_uid_1===auth.uid? 'sent': 'received'}   style={{ textAlign: con.user_uid_1===auth.uid? 'right': 'left' , marginTop: id===0? '15px': '2px'}}>
@@ -222,7 +261,7 @@ const HomePage = (props) => {
        </div>
        {   
            
-           ChatStarted?
+           ChatStarted && UserUid==user.talkingwith?
            <div className="chatControls" >
                <div    > 
                    <i className='fi fa fa-smile-o fa-2x' onClick={()=>openModal()}>
