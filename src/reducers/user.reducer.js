@@ -23,7 +23,8 @@ export default (state = initstate,action) => {
             state={
                 ...state,
                 conversations: action.payload.conversations,
-                talkingwith: action.payload.talking
+                talkingwith:action.payload.talkingwith
+               
             }
        
         break
@@ -35,11 +36,10 @@ export default (state = initstate,action) => {
            
         }
         break
-    
-    }
+   
     
 
-    
+  }
     return state
 }
 

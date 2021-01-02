@@ -39,7 +39,7 @@ export const getRealTimeConversations =(user)=> {
     return async dispatch => {
       
         const db =firestore()
-      db.collection('conversation')
+        db.collection('conversation')
        // .where('user_uid_1','in',[user.uid_1,user.uid_2])
         .orderBy('createdAt','asc')
         .onSnapshot((querySnapshot)=>{
@@ -62,16 +62,16 @@ export const getRealTimeConversations =(user)=> {
               
             
                 const talkingwith = user.uid_2
-                console.log(talkingwith)
+               
                 dispatch({
                     type: UserConstants.GET_REALTIME_MESSAGES,
                     payload: { conversations , talkingwith }
                 })
            
-
-            console.log(conversations)
+               console.log(conversations)
+           
         })    
-       
+     
     }
  
     
@@ -116,7 +116,7 @@ export const updateRealTimeView = (u) => {
     return async () => {
        
         const db = firestore()
-        console.log(u.uid_1,u.uid_2)
+       
        const unsubscribe = db.collection('conversation')
         .where('isView','==', false)
         .where('user_uid_2','==',u.uid_1)
@@ -133,7 +133,7 @@ export const updateRealTimeView = (u) => {
                         isView: true
                     })
                     .then(()=>{
-                        console.log('isViewed')
+                       
                        
                        
                     })
@@ -161,8 +161,9 @@ export const updateRealTimeView = (u) => {
 }
 export const updateMessage = (msgObj) => {
     return async dispatch => {
-        const db =firestore();
-       const unsubscribe =  db.collection('conversation')
+        
+       const db =firestore();
+       db.collection('conversation')
         .add({
             ...msgObj,
             isView: false,

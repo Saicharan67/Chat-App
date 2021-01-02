@@ -76,6 +76,9 @@ const HomePage = (props) => {
   const [message,setmessage] =useState('')
   const [UserUid,setUserUid] =useState('')
   const [view , setvisible]=useState(false)
+  let problem = UserUid==user.talkingwith
+  let convo = user.conversations
+ 
   
   
   const openModal = () => {
@@ -114,8 +117,8 @@ const HomePage = (props) => {
    
   
    const initChat = (talkingwith ,e) => {
-          
-           var chatHistory = document.getElementsByClassName("messageSections")[0];
+            
+          var chatHistory = document.getElementsByClassName("messageSections")[0];
          
            chatHistory.scrollTop = chatHistory.scrollHeight ;
            setChatStarted(true)
@@ -127,54 +130,11 @@ const HomePage = (props) => {
               
             }
             e.target.className='displayName active'     
-            //dispatch(getRealTimeConversations({uid_1: auth.uid, uid_2: talkingwith.uid  }))
-            const db =firestore()
-            db.collection('conversation')
-             // .where('user_uid_1','in',[user.uid_1,user.uid_2])
-              .orderBy('createdAt','asc')
-              .onSnapshot((querySnapshot)=>{
-                  const conversations = []
-                  querySnapshot.forEach(doc=>{
-                      if(
-                          (doc.data().user_uid_1 ===auth.uid && doc.data().user_uid_2 === talkingwith.uid)
-                          || 
-                          (doc.data().user_uid_1 === talkingwith.uid && doc.data().user_uid_2 === auth.uid)
-                      ){
-                          conversations.push(doc.data())
-                         
-      
-                      }
-                      
-                        
-                  })
-                 
-                      //console.log(user.uid_1,user.uid_2)
-                    
-                  
-                      const talking = talkingwith.uid
-                     if(user.talkingwith=='' || talkingwith.uid == user.talkingwith){
-                      dispatch({
-                          type: UserConstants.GET_REALTIME_MESSAGES,
-                          payload: { conversations , talking }
-                      })
-                     }
-                 
-      
-                  console.log(conversations)
-              })    
-             
-          
+            dispatch(getRealTimeConversations({uid_1: auth.uid, uid_2: talkingwith.uid  }))
             dispatch(getRealTimeNumberOfMessages(auth.uid))            
             dispatch(updateRealTimeView({uid_1: auth.uid, uid_2: talkingwith.uid  }))
-                
-               
-            
             console.log( auth.uid,talkingwith.uid)
-
            
-       
-       
-        
    } 
    const addEmoji = e => {
        let emoji = e.native;
@@ -229,9 +189,9 @@ const HomePage = (props) => {
       
        <div className="messageSections">
            {
-               (ChatStarted && UserUid==user.talkingwith)?
-               
-               user.conversations.map((con,id)=>
+               (ChatStarted)?
+               problem?
+               convo.map((con,id)=>
                    <div key={id} className={con.user_uid_1===auth.uid? 'sent': 'received'}   style={{ textAlign: con.user_uid_1===auth.uid? 'right': 'left' , marginTop: id===0? '15px': '2px'}}>
                        
                         {/* <p className={con.user_uid_1==auth.uid ?'messagestyleright':'messagestyleleft'}>{con.message}</p> */}
@@ -252,6 +212,9 @@ const HomePage = (props) => {
                         
                   </div>
                )
+               :
+               problem=!problem
+                   
                
                : <img className='startchat'
                src={require('../../assets/StartChat2.svg')}/>
@@ -261,7 +224,7 @@ const HomePage = (props) => {
        </div>
        {   
            
-           ChatStarted && UserUid==user.talkingwith?
+           ChatStarted ?
            <div className="chatControls" >
                <div    > 
                    <i className='fi fa fa-smile-o fa-2x' onClick={()=>openModal()}>
