@@ -77,8 +77,7 @@ const HomePage = (props) => {
   const [UserUid,setUserUid] =useState('')
   const [view , setvisible]=useState(false)
   let problem = UserUid==user.talkingwith
-  let convo = user.conversations
- 
+  
   
   
   const openModal = () => {
@@ -191,7 +190,7 @@ const HomePage = (props) => {
            {
                (ChatStarted)?
                problem?
-               convo.map((con,id)=>
+               user.conversations.map((con,id)=>
                    <div key={id} className={con.user_uid_1===auth.uid? 'sent': 'received'}   style={{ textAlign: con.user_uid_1===auth.uid? 'right': 'left' , marginTop: id===0? '15px': '2px'}}>
                        
                         {/* <p className={con.user_uid_1==auth.uid ?'messagestyleright':'messagestyleleft'}>{con.message}</p> */}
