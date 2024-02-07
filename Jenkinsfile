@@ -2,21 +2,13 @@ pipeline {
     agent any
 
     stages {
-       
-       
-
-        stage('Install dependencies') {
-            steps {
-                sh 'npm install' // Or use 'yarn install' if preferred
-            }
-        }
-
+    
         stage('Build') {
-            steps {
-                sh 'npm run build' // Or use 'yarn build' if preferred
+                steps {
+                    tool name: 'nodejs', type: 'nodejs', version: '20.5.0'
+                    sh 'npm install'
+                    sh 'npm run build'
+                }
             }
         }
-
-
-    }
 }
