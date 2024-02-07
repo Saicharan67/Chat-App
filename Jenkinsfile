@@ -1,6 +1,6 @@
 pipeline {
  
-   tools {nodejs "node"}
+   tools {nodejs "Node"}
     stages {
          
         stage('Build') {
