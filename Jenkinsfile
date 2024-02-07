@@ -12,9 +12,9 @@ pipline{
    }
 
     stage('Build'){
-
       sh 'npm install'
     }
  }
 
+}
 }
