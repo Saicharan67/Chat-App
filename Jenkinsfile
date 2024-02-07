@@ -5,7 +5,7 @@ pipeline {
     
         stage('Build') {
                 steps {
-                    tool name: 'nodejs', type: 'nodejs', version: '20.5.0'
+                    tool name: 'nodejs', type: 'nodejs'
                     sh 'npm install'
                     sh 'npm run build'
                 }
