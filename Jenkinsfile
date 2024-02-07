@@ -1,15 +1,22 @@
-pipeline{
-  
- agent any
-  tools{
-    nodejs 'nodejs'
-  }
-   stages{
+pipeline {
+    agent any
 
-    stage('Build'){
-      sh 'npm install'
+    stages {
+       
+       
+
+        stage('Install dependencies') {
+            steps {
+                sh 'npm install' // Or use 'yarn install' if preferred
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'npm run build' // Or use 'yarn build' if preferred
+            }
+        }
+
+
     }
- }
-
-
 }
